@@ -1,22 +1,12 @@
 ---
 import Base from '../layouts/Base.astro';
 import Icon from '../components/Icon.astro';
-import rawGalleryItems from '../data/gallery.json';
+import { content } from '../i18n/content';
 import { getLang, useTranslations, localizePath } from '../i18n/utils';
 
-interface GalleryItem {
-  cat: string[];
-  title: string;
-  img: string;
-  code: string;
-  link: string;
-  tech: string[];
-  desc: string;
-}
-
-const galleryItems = rawGalleryItems as GalleryItem[];
 const lang = getLang(Astro.currentLocale);
 const t = useTranslations(lang);
+const { projects: galleryItems } = content[lang];
 const backHref = `${localizePath(lang, '/')}#projects`;
 ---
 
@@ -33,7 +23,7 @@ const backHref = `${localizePath(lang, '/')}#projects`;
         <section class="gallery-items" id="gallery-items">
           {
             galleryItems.map((item, index) => (
-              <div class="gallery-item" data-cats={item.cat.join(',')}>
+              <div class="gallery-item">
                 <div class="gallery-item-cover" data-modal-target={`gallery-modal-${index}`} role="button" tabindex="0" aria-label={`${t('projects.aria.details')}: ${item.title}`}>
                   <img src={item.img} alt={`An image of the ${item.title} project.`} width="1920" height="1080" loading="lazy" />
                 </div>
@@ -41,9 +31,11 @@ const backHref = `${localizePath(lang, '/')}#projects`;
                   <div class="gallery-item-title">
                     <h4>{item.title}</h4>
                     <div class="gallery-item-title-line" />
-                    <a href={item.code} target="_blank" rel="nofollow" title="GitHub" aria-label={t('projects.aria.code')}>
-                      <Icon name="github" size="2.8rem" />
-                    </a>
+                    {item.code && (
+                      <a href={item.code} target="_blank" rel="nofollow" title="GitHub" aria-label={t('projects.aria.code')}>
+                        <Icon name="github" size="2.8rem" />
+                      </a>
+                    )}
                     <a href={item.link} target="_blank" rel="nofollow" title="Demo" aria-label={t('projects.aria.demo')}>
                       <Icon name="external" size="2.8rem" />
                     </a>
@@ -56,6 +48,8 @@ const backHref = `${localizePath(lang, '/')}#projects`;
         </section>
       )
     }
+
+    {galleryItems.length > 0 && <p class="gallery-disclaimer">{t('gallery.disclaimer')}</p>}
 
     <button class="gallery-go-up-btn" id="go-up-btn" aria-label={t('nav.aria.backToTop')}>
       <Icon name="arrowUp" size="2.4rem" />
@@ -73,17 +67,19 @@ const backHref = `${localizePath(lang, '/')}#projects`;
           <div class="modal-content">
             <h4>{item.title}</h4>
             <div class="modal-tech">{item.tech.join(' - ')}</div>
-            <div class="modal-supplied-content">{item.desc}</div>
+            <div class="modal-supplied-content">{item.modal}</div>
             <div class="modal-footer">
               <p class="modal-links-text">
                 {t('projects.modal.links')}<span>.</span>
               </p>
               <div class="modal-space-between">
                 <div class="modal-links">
-                  <a href={item.code} target="_blank" rel="nofollow" title="GitHub" aria-label={t('projects.aria.code')}>
-                    <Icon name="github" size="2rem" />
-                    {t('projects.modal.code')}
-                  </a>
+                  {item.code && (
+                    <a href={item.code} target="_blank" rel="nofollow" title="GitHub" aria-label={t('projects.aria.code')}>
+                      <Icon name="github" size="2rem" />
+                      {t('projects.modal.code')}
+                    </a>
+                  )}
                   <a href={item.link} target="_blank" rel="nofollow" title="Demo" aria-label={t('projects.aria.demo')}>
                     <Icon name="external" size="2rem" />
                     {t('projects.modal.demo')}

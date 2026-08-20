@@ -6,6 +6,10 @@ import { content } from '../i18n/content';
 const lang = getLang(Astro.currentLocale);
 const t = useTranslations(lang);
 const { hero } = content[lang];
+
+const titleWords = hero.title.split(' ');
+const titleLastWord = titleWords.pop();
+const titleFirstLine = titleWords.join(' ');
 ---
 
 <section class="section-wrapper hero" id="hero">
@@ -13,7 +17,7 @@ const { hero } = content[lang];
     <div class="hero-copy-wrapper">
       <div class="reveal-line">
         <div class="reveal-line-inner" style="animation-delay: 0.1s">
-          <h1 class="hero-title">{hero.title}<span>.</span></h1>
+          <h1 class="hero-title">{titleFirstLine}<br />{titleLastWord}<span>.</span></h1>
         </div>
         <div class="reveal-curtain" style="animation-delay: 0.35s"></div>
       </div>

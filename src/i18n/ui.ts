@@ -61,6 +61,7 @@ export const ui = {
     'gallery.title': 'Galería',
     'gallery.aria.back': 'Volver al inicio',
     'gallery.empty': 'Muy pronto encontrarás proyectos por aquí.',
+    'gallery.disclaimer': 'Sigo trabajando en más proyectos — pronto habrá más aquí.',
   },
   en: {
     'nav.about': 'About',
@@ -117,5 +118,6 @@ export const ui = {
     'gallery.title': 'Gallery',
     'gallery.aria.back': 'Back to homepage',
     'gallery.empty': 'Projects are on their way — check back soon.',
+    'gallery.disclaimer': "I'm still working on more projects — new ones will land here soon.",
   },
 } as const;
