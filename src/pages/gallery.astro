@@ -1,0 +1,147 @@
+---
+import Base from '../layouts/Base.astro';
+import Icon from '../components/Icon.astro';
+import rawGalleryItems from '../data/gallery.json';
+import { getLang, useTranslations, localizePath } from '../i18n/utils';
+
+interface GalleryItem {
+  cat: string[];
+  title: string;
+  img: string;
+  code: string;
+  link: string;
+  tech: string[];
+  desc: string;
+}
+
+const galleryItems = rawGalleryItems as GalleryItem[];
+const lang = getLang(Astro.currentLocale);
+const t = useTranslations(lang);
+const backHref = `${localizePath(lang, '/')}#projects`;
+---
+
+<Base title={`${t('gallery.title')} — Omar Diego`} description={t('gallery.title')}>
+  <main class="gallery-wrapper" id="gallery">
+    <a class="gallery-go-back-btn" href={backHref} aria-label={t('gallery.aria.back')}>
+      <Icon name="arrowLeft" size="2.4rem" />
+    </a>
+
+    {
+      galleryItems.length === 0 ? (
+        <p class="gallery-empty">{t('gallery.empty')}</p>
+      ) : (
+        <section class="gallery-items" id="gallery-items">
+          {
+            galleryItems.map((item, index) => (
+              <div class="gallery-item" data-cats={item.cat.join(',')}>
+                <div class="gallery-item-cover" data-modal-target={`gallery-modal-${index}`} role="button" tabindex="0" aria-label={`${t('projects.aria.details')}: ${item.title}`}>
+                  <img src={item.img} alt={`An image of the ${item.title} project.`} width="1920" height="1080" loading="lazy" />
+                </div>
+                <div class="gallery-item-copy">
+                  <div class="gallery-item-title">
+                    <h4>{item.title}</h4>
+                    <div class="gallery-item-title-line" />
+                    <a href={item.code} target="_blank" rel="nofollow" title="GitHub" aria-label={t('projects.aria.code')}>
+                      <Icon name="github" size="2.8rem" />
+                    </a>
+                    <a href={item.link} target="_blank" rel="nofollow" title="Demo" aria-label={t('projects.aria.demo')}>
+                      <Icon name="external" size="2.8rem" />
+                    </a>
+                  </div>
+                  <div class="gallery-item-tech">{item.tech.join(' - ')}</div>
+                </div>
+              </div>
+            ))
+          }
+        </section>
+      )
+    }
+
+    <button class="gallery-go-up-btn" id="go-up-btn" aria-label={t('nav.aria.backToTop')}>
+      <Icon name="arrowUp" size="2.4rem" />
+    </button>
+  </main>
+
+  {
+    galleryItems.map((item, index) => (
+      <div class="modal" id={`gallery-modal-${index}`} role="dialog" aria-modal="true" aria-label={`${item.title} details`}>
+        <div class="modal-card">
+          <button class="modal-close-btn" data-modal-close aria-label={t('projects.aria.closeModal')}>
+            <Icon name="close" size="2rem" />
+          </button>
+          <img class="modal-image blur" src={item.img} alt={`An image of the ${item.title} project.`} width="1080" height="608" loading="lazy" onload="this.classList.remove('blur'); this.classList.add('remove-blur')" />
+          <div class="modal-content">
+            <h4>{item.title}</h4>
+            <div class="modal-tech">{item.tech.join(' - ')}</div>
+            <div class="modal-supplied-content">{item.desc}</div>
+            <div class="modal-footer">
+              <p class="modal-links-text">
+                {t('projects.modal.links')}<span>.</span>
+              </p>
+              <div class="modal-space-between">
+                <div class="modal-links">
+                  <a href={item.code} target="_blank" rel="nofollow" title="GitHub" aria-label={t('projects.aria.code')}>
+                    <Icon name="github" size="2rem" />
+                    {t('projects.modal.code')}
+                  </a>
+                  <a href={item.link} target="_blank" rel="nofollow" title="Demo" aria-label={t('projects.aria.demo')}>
+                    <Icon name="external" size="2rem" />
+                    {t('projects.modal.demo')}
+                  </a>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    ))
+  }
+
+  <script>
+    // --- Go up button ---
+    const goUpBtn = document.getElementById('go-up-btn');
+    window.addEventListener('scroll', () => {
+      goUpBtn?.classList.toggle('visible', window.scrollY >= 350);
+    });
+    goUpBtn?.addEventListener('click', () => window.scrollTo({ top: 0, behavior: 'smooth' }));
+
+    // --- Modal handling ---
+    const modals = Array.from(document.querySelectorAll('.modal'));
+
+    const openModal = (id) => {
+      const modal = document.getElementById(id);
+      if (!modal) return;
+      modal.classList.add('open');
+      document.body.style.overflowY = 'hidden';
+    };
+
+    const closeModal = (modal) => {
+      modal.classList.remove('open');
+      document.body.style.overflowY = 'scroll';
+    };
+
+    document.querySelectorAll('[data-modal-target]').forEach((el) => {
+      el.addEventListener('click', () => openModal(el.getAttribute('data-modal-target')));
+      el.addEventListener('keydown', (e) => {
+        if (e.key === 'Enter' || e.key === ' ') {
+          e.preventDefault();
+          openModal(el.getAttribute('data-modal-target'));
+        }
+      });
+    });
+
+    modals.forEach((modal) => {
+      modal.addEventListener('click', (e) => {
+        if (e.target === modal) closeModal(modal);
+      });
+      const closeBtn = modal.querySelector('[data-modal-close]');
+      closeBtn?.addEventListener('click', () => closeModal(modal));
+    });
+
+    document.addEventListener('keydown', (e) => {
+      if (e.key === 'Escape') {
+        modals.forEach((m) => m.classList.contains('open') && closeModal(m));
+      }
+    });
+  </script>
+</Base>

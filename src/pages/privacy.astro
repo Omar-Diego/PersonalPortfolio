@@ -1,0 +1,139 @@
+---
+import Base from '../layouts/Base.astro';
+import Navbar from '../components/Navbar.astro';
+import SectionHeader from '../components/SectionHeader.astro';
+import Footer from '../components/Footer.astro';
+import Reveal from '../components/Reveal.astro';
+import { getLang, localizePath } from '../i18n/utils';
+import { content } from '../i18n/content';
+
+const lang = getLang(Astro.currentLocale);
+const { socials } = content[lang];
+const homeHref = localizePath(lang, '/');
+
+const copy =
+  lang === 'es'
+    ? {
+        pageTitle: 'Privacidad',
+        effectiveDateLabel: 'Fecha de vigencia:',
+        effectiveDate: 'Enero de 2026',
+        introTitle: 'Introducción',
+        introText: 'Tu privacidad es importante. Esta Política de Privacidad explica cómo se recopila, usa y protege tu información al visitar este sitio.',
+        infoTitle: 'Información que recopilamos',
+        infoPersonalTitle: 'Información personal',
+        infoPersonalText: 'No recopilamos información personal a menos que decidas contactarme. Si me envías un correo, podría recibir:',
+        infoPersonalList: ['Tu dirección de correo electrónico', 'Cualquier otro dato que incluyas en tu mensaje'],
+        infoNonPersonalTitle: 'Información no personal',
+        infoNonPersonalText: 'No recopilamos automáticamente información como direcciones IP, datos del navegador o de uso.',
+        useTitle: 'Cómo usamos tu información',
+        useText: 'Si me contactas por correo, uso la información únicamente para:',
+        useList: ['Responder a tu mensaje', 'Brindar la ayuda o información solicitada'],
+        useFooter: 'No usamos tu información con fines de marketing ni la compartimos con terceros.',
+        sharingTitle: 'Compartir tu información',
+        sharingText: 'No vendemos, alquilamos ni compartimos tus datos personales con terceros.',
+        cookiesTitle: 'Cookies',
+        cookiesText: 'Este sitio utiliza una cookie técnica para recordar tu preferencia de idioma. No usamos cookies de rastreo ni de terceros.',
+        retentionTitle: 'Conservación de datos',
+        retentionText: 'Conservamos la información de tus correos solo el tiempo necesario para responder tu solicitud.',
+        rightsTitle: 'Tus derechos',
+        rightsText: 'Tienes derecho a:',
+        rightsList: ['Solicitar acceso a la información que nos has proporcionado', 'Solicitar la eliminación de tus datos de nuestros registros'],
+        changesTitle: 'Cambios a esta política',
+        changesText: 'Esta Política de Privacidad puede actualizarse; cualquier cambio se reflejará en esta página.',
+        contactTitle: 'Contacto',
+        contactText: 'Si tienes dudas sobre esta política, contáctame en:',
+      }
+    : {
+        pageTitle: 'Privacy',
+        effectiveDateLabel: 'Effective Date:',
+        effectiveDate: 'January 2026',
+        introTitle: 'Introduction',
+        introText: 'Your privacy matters. This Privacy Policy explains how your information is collected, used, and protected when you visit this site.',
+        infoTitle: 'Information We Collect',
+        infoPersonalTitle: 'Personal Information',
+        infoPersonalText: 'We do not collect personal information unless you choose to contact us. If you send an email, we may receive:',
+        infoPersonalList: ['Your email address', 'Any other details you include in your message'],
+        infoNonPersonalTitle: 'Non-Personal Information',
+        infoNonPersonalText: 'We do not automatically collect information such as IP addresses, browser details, or usage data.',
+        useTitle: 'How We Use Your Information',
+        useText: 'If you contact us via email, we use the information solely to:',
+        useList: ['Respond to your inquiry', 'Provide any requested assistance or information'],
+        useFooter: 'We do not use your information for marketing purposes or share it with third parties.',
+        sharingTitle: 'Sharing Your Information',
+        sharingText: 'We do not sell, rent, or share your personal data with third parties.',
+        cookiesTitle: 'Cookies',
+        cookiesText: 'This site uses a technical cookie to remember your language preference. We do not use tracking or third-party cookies.',
+        retentionTitle: 'Data Retention',
+        retentionText: 'We retain the information from your emails only as long as necessary to respond to your inquiry.',
+        rightsTitle: 'Your Rights',
+        rightsText: 'You have the right to:',
+        rightsList: ['Request access to the information you have provided', 'Request deletion of your information from our records'],
+        changesTitle: 'Changes to This Policy',
+        changesText: 'This Privacy Policy may be updated from time to time; changes will be reflected on this page.',
+        contactTitle: 'Contact',
+        contactText: 'If you have questions about this policy, contact me at:',
+      };
+---
+
+<Base title={`${copy.pageTitle} — Omar Diego`} description={copy.introText}>
+  <div class="home">
+    <main>
+      <Navbar />
+      <section class="legal">
+        <SectionHeader title={copy.pageTitle} dir="r" />
+
+        <p>
+          <strong>{copy.effectiveDateLabel}</strong> {copy.effectiveDate}
+        </p>
+
+        <h2>{copy.introTitle}</h2>
+        <p>
+          {lang === 'es' ? 'Bienvenido a' : 'Welcome to'} <a href={homeHref}>Omar Diego</a>.
+        </p>
+        <p>{copy.introText}</p>
+
+        <h2>{copy.infoTitle}</h2>
+        <h3>{copy.infoPersonalTitle}</h3>
+        <p>{copy.infoPersonalText}</p>
+        <ul>
+          {copy.infoPersonalList.map((item) => <li>👉 {item}</li>)}
+        </ul>
+        <h3>{copy.infoNonPersonalTitle}</h3>
+        <p>{copy.infoNonPersonalText}</p>
+
+        <h2>{copy.useTitle}</h2>
+        <p>{copy.useText}</p>
+        <ul>
+          {copy.useList.map((item) => <li>👉 {item}</li>)}
+        </ul>
+        <p>{copy.useFooter}</p>
+
+        <h2>{copy.sharingTitle}</h2>
+        <p>{copy.sharingText}</p>
+
+        <h2>{copy.cookiesTitle}</h2>
+        <p>{copy.cookiesText}</p>
+
+        <h2>{copy.retentionTitle}</h2>
+        <p>{copy.retentionText}</p>
+
+        <h2>{copy.rightsTitle}</h2>
+        <p>{copy.rightsText}</p>
+        <ul>
+          {copy.rightsList.map((item) => <li>👉 {item}</li>)}
+        </ul>
+
+        <h2>{copy.changesTitle}</h2>
+        <p>{copy.changesText}</p>
+
+        <h2>{copy.contactTitle}</h2>
+        <p>{copy.contactText}</p>
+        <a href={`mailto:${socials.email}`} target="_blank" rel="nofollow" aria-label={copy.contactTitle}>
+          <span>{socials.email}</span>
+        </a>
+      </section>
+      <Footer />
+    </main>
+  </div>
+  <Reveal />
+</Base>

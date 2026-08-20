@@ -1,0 +1,218 @@
+---
+import Icon from './Icon.astro';
+import { getLang, useTranslations, localizePath } from '../i18n/utils';
+import { languages } from '../i18n/ui';
+import { content } from '../i18n/content';
+
+const lang = getLang(Astro.currentLocale);
+const t = useTranslations(lang);
+const { socials } = content[lang];
+const home = localizePath(lang, '/');
+
+const links = [
+  { hash: '#about', label: t('nav.about'), aria: t('about.title') },
+  { hash: '#projects', label: t('nav.projects'), aria: t('projects.title') },
+  { hash: '#experience', label: t('nav.experience'), aria: t('experience.title') },
+  { hash: '#certification', label: t('nav.certification'), aria: t('certification.title') },
+  { hash: '#contact', label: t('nav.contact'), aria: t('contact.title') },
+];
+
+const otherLang = lang === 'es' ? 'en' : 'es';
+const pathname = Astro.url.pathname;
+const basePath = pathname.startsWith('/en') ? pathname.replace(/^\/en/, '') || '/' : pathname;
+const otherLangHref = localizePath(otherLang, basePath);
+---
+
+<header class="navbar">
+  <div class="navbar-left">
+    <a class="navbar-logo" aria-label={t('nav.aria.backToTop')} href={`${home}#hero`}>DC<span>.</span></a>
+    <nav class="navbar-links" id="section-nav" aria-label={t('nav.aria.section')}>
+      {
+        links.map((link, index) => (
+          <>
+            {index > 0 && <span class="navbar-divider" aria-hidden="true">|</span>}
+            <a class="navbar-link" href={`${home}${link.hash}`} aria-label={link.aria} data-section={link.hash.slice(1)}>
+              {link.label}
+            </a>
+          </>
+        ))
+      }
+    </nav>
+  </div>
+  <div class="navbar-buttons">
+    <div class="navbar-buttons-full">
+      <div class="socials">
+        <span class="fade-up" style="animation-delay: 0.1s">
+          <a href={socials.linkedin} target="_blank" rel="nofollow" title="LinkedIn" aria-label={t('navbar.aria.linkedin')}>
+            <Icon name="linkedin" size="2.4rem" />
+          </a>
+        </span>
+        <span class="fade-up" style="animation-delay: 0.2s">
+          <a href={socials.github} target="_blank" rel="nofollow" title="GitHub" aria-label={t('navbar.aria.github')}>
+            <Icon name="github" size="2.4rem" />
+          </a>
+        </span>
+        <span class="fade-up" style="animation-delay: 0.4s">
+          <a href={`mailto:${socials.email}`} target="_blank" rel="nofollow" title="Email" aria-label={t('navbar.aria.email')}>
+            <Icon name="mail" size="2.4rem" />
+          </a>
+        </span>
+      </div>
+      <span class="fade-up" style="animation-delay: 0.45s">
+        <a
+          href={otherLangHref}
+          class="navbar-outline-btn lang-toggle-btn"
+          data-lang={otherLang}
+          aria-label={t('navbar.aria.langSwitch')}
+          title={languages[otherLang]}
+        >
+          {otherLang.toUpperCase()}
+        </a>
+      </span>
+      <span class="fade-up" style="animation-delay: 0.6s">
+        <a href={socials.cv} target="_blank" rel="nofollow" title="Resume">
+          <button class="navbar-outline-btn navbar-cv-btn" aria-label={t('navbar.aria.cv')}>
+            {t('navbar.cv')}
+            <Icon name="download" size="2.4rem" />
+          </button>
+        </a>
+      </span>
+    </div>
+    <span class="fade-up" style="animation-delay: 0.5s">
+      <button
+        id="theme-toggle"
+        class="navbar-outline-btn theme-toggle-btn"
+        aria-label={t('navbar.aria.themeToggle')}
+        title={t('navbar.aria.themeToggle')}
+      >
+        <Icon name="sun" size="2.4rem" class="theme-icon-sun" />
+        <Icon name="moon" size="2.4rem" class="theme-icon-moon" />
+      </button>
+    </span>
+    <span class="fade-up navbar-menu-btn-wrap" style="animation-delay: 0.15s">
+      <button
+        id="navbar-menu-toggle"
+        class="navbar-outline-btn navbar-menu-btn"
+        aria-label={t('nav.aria.section')}
+        aria-expanded="false"
+        aria-controls="mobile-section-nav"
+      >
+        <Icon name="menu" size="2.4rem" class="menu-icon-open" />
+        <Icon name="close" size="2.4rem" class="menu-icon-close" />
+      </button>
+    </span>
+  </div>
+  <nav class="navbar-mobile-menu" id="mobile-section-nav" aria-label={t('nav.aria.section')}>
+    {
+      links.map((link) => (
+        <a class="navbar-mobile-link" href={`${home}${link.hash}`} aria-label={link.aria} data-section={link.hash.slice(1)}>
+          {link.label}
+        </a>
+      ))
+    }
+    <div class="navbar-mobile-extra">
+      <a
+        href={otherLangHref}
+        class="navbar-outline-btn lang-toggle-btn"
+        data-lang={otherLang}
+        aria-label={t('navbar.aria.langSwitch')}
+        title={languages[otherLang]}
+      >
+        {otherLang.toUpperCase()}
+      </a>
+      <a href={socials.cv} target="_blank" rel="nofollow" title="Resume">
+        <button class="navbar-outline-btn navbar-cv-btn" aria-label={t('navbar.aria.cv')}>
+          {t('navbar.cv')}
+          <Icon name="download" size="2.4rem" />
+        </button>
+      </a>
+    </div>
+    <div class="navbar-mobile-socials socials">
+      <a href={socials.linkedin} target="_blank" rel="nofollow" title="LinkedIn" aria-label={t('navbar.aria.linkedin')}>
+        <Icon name="linkedin" size="2.4rem" />
+      </a>
+      <a href={socials.github} target="_blank" rel="nofollow" title="GitHub" aria-label={t('navbar.aria.github')}>
+        <Icon name="github" size="2.4rem" />
+      </a>
+      <a href={`mailto:${socials.email}`} target="_blank" rel="nofollow" title="Email" aria-label={t('navbar.aria.email')}>
+        <Icon name="mail" size="2.4rem" />
+      </a>
+    </div>
+  </nav>
+</header>
+
+<script>
+  const toggle = document.getElementById('theme-toggle');
+
+  toggle?.addEventListener('click', () => {
+    const root = document.documentElement;
+    const next = root.getAttribute('data-theme') === 'light' ? 'dark' : 'light';
+    root.setAttribute('data-theme', next);
+    localStorage.setItem('theme', next);
+  });
+
+  document.querySelectorAll('.lang-toggle-btn').forEach((el) => {
+    el.addEventListener('click', () => {
+      const lang = el.getAttribute('data-lang');
+      if (lang) document.cookie = `pf_lang=${lang}; path=/; max-age=31536000; samesite=lax`;
+    });
+  });
+
+  const sectionNav = document.getElementById('section-nav');
+  const navLinks = sectionNav?.querySelectorAll('.navbar-link');
+  const mobileLinks = document.querySelectorAll('.navbar-mobile-link');
+  const sections = document.querySelectorAll('.section-wrapper');
+
+  if (sections.length && (navLinks?.length || mobileLinks.length)) {
+    const observer = new IntersectionObserver(
+      (entries) => {
+        entries.forEach((entry) => {
+          if (entry.isIntersecting) {
+            navLinks?.forEach((l) => {
+              const active = l.getAttribute('data-section') === entry.target.id;
+              l.classList.toggle('selected', active);
+            });
+            mobileLinks.forEach((l) => {
+              const active = l.getAttribute('data-section') === entry.target.id;
+              l.classList.toggle('selected', active);
+            });
+          }
+        });
+      },
+      { threshold: 0.3 }
+    );
+    sections.forEach((s) => observer.observe(s));
+  }
+
+  const menuToggle = document.getElementById('navbar-menu-toggle');
+  const mobileMenu = document.getElementById('mobile-section-nav');
+
+  const closeMenu = () => {
+    menuToggle?.classList.remove('open');
+    menuToggle?.setAttribute('aria-expanded', 'false');
+    mobileMenu?.classList.remove('open');
+    document.body.style.overflowY = '';
+  };
+
+  const openMenu = () => {
+    menuToggle?.classList.add('open');
+    menuToggle?.setAttribute('aria-expanded', 'true');
+    mobileMenu?.classList.add('open');
+    document.body.style.overflowY = 'hidden';
+  };
+
+  menuToggle?.addEventListener('click', () => {
+    if (mobileMenu?.classList.contains('open')) closeMenu();
+    else openMenu();
+  });
+
+  mobileLinks.forEach((l) => l.addEventListener('click', closeMenu));
+
+  document.addEventListener('keydown', (e) => {
+    if (e.key === 'Escape') closeMenu();
+  });
+
+  window.addEventListener('resize', () => {
+    if (window.innerWidth > 900) closeMenu();
+  });
+</script>

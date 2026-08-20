@@ -1,0 +1,75 @@
+---
+---
+
+<div class="cursor-dot" id="cursor-dot" aria-hidden="true"></div>
+<div class="cursor-follow" id="cursor-follow" aria-hidden="true"></div>
+
+<script>
+  const dot = document.getElementById('cursor-dot');
+  const follow = document.getElementById('cursor-follow');
+
+  if (dot && follow && window.matchMedia('(pointer: fine)').matches) {
+    const reduceMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+    const interactiveSelector = 'a, button, input, textarea, select, [role="button"], .chip, .gallery-filter-tag';
+
+    let mouseX = 0;
+    let mouseY = 0;
+    let followX = 0;
+    let followY = 0;
+    let active = false;
+
+    const show = () => {
+      if (active) return;
+      active = true;
+      dot.classList.add('cursor-active');
+      follow.classList.add('cursor-active');
+      document.body.classList.add('cursor-none');
+    };
+
+    const hide = () => {
+      active = false;
+      dot.classList.remove('cursor-active');
+      follow.classList.remove('cursor-active');
+      document.body.classList.remove('cursor-none');
+    };
+
+    window.addEventListener('mousemove', (e) => {
+      mouseX = e.clientX;
+      mouseY = e.clientY;
+      show();
+      dot.style.transform = `translate3d(${mouseX}px, ${mouseY}px, 0) translate(-50%, -50%)`;
+      if (reduceMotion) {
+        followX = mouseX;
+        followY = mouseY;
+        follow.style.transform = `translate3d(${followX}px, ${followY}px, 0) translate(-50%, -50%)`;
+      }
+    });
+
+    document.addEventListener('mouseleave', hide);
+    document.addEventListener('mouseenter', show);
+
+    document.addEventListener('mouseover', (e) => {
+      const target = e.target;
+      if (target instanceof Element && target.closest(interactiveSelector)) {
+        follow.classList.add('cursor-hover');
+      }
+    });
+
+    document.addEventListener('mouseout', (e) => {
+      const target = e.target;
+      if (target instanceof Element && target.closest(interactiveSelector)) {
+        follow.classList.remove('cursor-hover');
+      }
+    });
+
+    if (!reduceMotion) {
+      const loop = () => {
+        followX += (mouseX - followX) * 0.15;
+        followY += (mouseY - followY) * 0.15;
+        follow.style.transform = `translate3d(${followX}px, ${followY}px, 0) translate(-50%, -50%)`;
+        requestAnimationFrame(loop);
+      };
+      requestAnimationFrame(loop);
+    }
+  }
+</script>

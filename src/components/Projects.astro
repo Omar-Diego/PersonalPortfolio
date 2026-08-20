@@ -1,0 +1,156 @@
+---
+import SectionHeader from './SectionHeader.astro';
+import Icon from './Icon.astro';
+import { Icon as Iconify } from 'astro-icon/components';
+import { getLang, useTranslations, localizePath } from '../i18n/utils';
+import { content } from '../i18n/content';
+
+const lang = getLang(Astro.currentLocale);
+const t = useTranslations(lang);
+const { projects } = content[lang];
+const galleryHref = localizePath(lang, '/gallery');
+---
+
+<section class="section-wrapper" id="projects">
+  <SectionHeader title={t('projects.title')} dir="r" />
+
+  <div class="link-to-gallery reveal">
+    <a href={galleryHref} aria-label={t('projects.aria.fullGallery')}>
+      <Iconify name="lucide:arrow-right" width="2rem" height="2rem" />
+      {t('projects.fullGallery')}
+    </a>
+  </div>
+
+  <div class="projects">
+    {
+      projects.length === 0 ? (
+        <p class="projects-empty">{t('projects.empty')}</p>
+      ) : (
+        projects.map((project, index) => (
+          <div class="project-card reveal" style={`transition-delay: ${(index % 2) * 0.1}s`}>
+            <div class="project-image" data-modal-target={`modal-${index}`} role="button" tabindex="0" aria-label={`${t('projects.aria.details')}: ${project.title}`}>
+              <img src={project.img} alt={`An image of the ${project.title} project.`} width="1920" height="1080" loading="lazy" />
+            </div>
+            <div class="project-copy">
+              <div class="project-title">
+                <h4>{project.title}</h4>
+                <div class="project-title-line" />
+                {project.code && (
+                  <a href={project.code} target="_blank" rel="nofollow" title="GitHub" aria-label={t('projects.aria.code')}>
+                    <Icon name="github" size="2.8rem" />
+                  </a>
+                )}
+                <a href={project.link} target="_blank" rel="nofollow" title="Demo" aria-label={t('projects.aria.demo')}>
+                  <Icon name="external" size="2.8rem" />
+                </a>
+              </div>
+              <div class="project-tech">{project.tech.join(' - ')}</div>
+              <p class="project-description">
+                {project.desc}
+                <br />
+                <span data-modal-target={`modal-${index}`} aria-label={t('projects.aria.details')}>{t('projects.details')} &gt;</span>
+              </p>
+            </div>
+          </div>
+        ))
+      )
+    }
+  </div>
+
+  <div class="link-to-gallery reveal">
+    <a href={galleryHref} aria-label={t('projects.aria.fullGallery')}>
+      <Iconify name="lucide:arrow-right" width="2rem" height="2rem" />
+      {t('projects.fullGallery')}
+    </a>
+  </div>
+</section>
+
+{
+  projects.map((project, index) => (
+    <div class="modal" id={`modal-${index}`} role="dialog" aria-modal="true" aria-label={`${project.title} details`}>
+      <div class="modal-card">
+        <button class="modal-close-btn" data-modal-close aria-label={t('projects.aria.closeModal')}>
+          <Icon name="close" size="2rem" />
+        </button>
+        <img class="modal-image blur" src={project.img} alt={`An image of the ${project.title} project.`} width="1080" height="608" loading="lazy" onload="this.classList.remove('blur'); this.classList.add('remove-blur')" />
+        <div class="modal-content">
+          <h4>{project.title}</h4>
+          <div class="modal-tech">{project.tech.join(' - ')}</div>
+          <div class="modal-supplied-content">{project.modal}</div>
+          <div class="modal-footer">
+            <p class="modal-links-text">
+              {t('projects.modal.links')}<span>.</span>
+            </p>
+            <div class="modal-space-between">
+              <div class="modal-links">
+                {project.code && (
+                  <a href={project.code} target="_blank" rel="nofollow" title="GitHub" aria-label={t('projects.aria.code')}>
+                    <Icon name="github" size="2rem" />
+                    {t('projects.modal.code')}
+                  </a>
+                )}
+                <a href={project.link} target="_blank" rel="nofollow" title="Demo" aria-label={t('projects.aria.demo')}>
+                  <Icon name="external" size="2rem" />
+                  {t('projects.modal.demo')}
+                </a>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  ))
+}
+
+<script>
+  // Modal handling for project details
+  const modals = Array.from(document.querySelectorAll('.modal'));
+
+  const openModal = (id) => {
+    const modal = document.getElementById(id);
+    if (!modal) return;
+    modal.classList.add('open');
+    document.body.style.overflowY = 'hidden';
+  };
+
+  const closeModal = (modal) => {
+    modal.classList.remove('open');
+    document.body.style.overflowY = 'scroll';
+  };
+
+  document.querySelectorAll('[data-modal-target]').forEach((el) => {
+    el.addEventListener('click', () => openModal(el.getAttribute('data-modal-target')));
+    el.addEventListener('keydown', (e) => {
+      if (e.key === 'Enter' || e.key === ' ') {
+        e.preventDefault();
+        openModal(el.getAttribute('data-modal-target'));
+      }
+    });
+  });
+
+  modals.forEach((modal) => {
+    modal.addEventListener('click', (e) => {
+      if (e.target === modal) closeModal(modal);
+    });
+    const closeBtn = modal.querySelector('[data-modal-close]');
+    closeBtn?.addEventListener('click', () => closeModal(modal));
+  });
+
+  document.addEventListener('keydown', (e) => {
+    if (e.key === 'Escape') {
+      modals.forEach((m) => m.classList.contains('open') && closeModal(m));
+    }
+  });
+</script>
+
+<style>
+  .project-image:hover img {
+    width: 90%;
+    rotate: 2deg;
+  }
+
+  .projects-empty {
+    opacity: 0.6;
+    padding: 2.4rem 0;
+  }
+</style>

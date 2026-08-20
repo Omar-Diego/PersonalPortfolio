@@ -1,0 +1,19 @@
+---
+import { getLang, useTranslations, localizePath } from '../i18n/utils';
+
+const lang = getLang(Astro.currentLocale);
+const t = useTranslations(lang);
+const year = new Date().getFullYear();
+---
+
+<footer class="footer">
+  <p>© {year} {t('footer.rights')}</p>
+  <ul>
+    <li>
+      <a href={localizePath(lang, '/privacy')} aria-label={t('footer.privacy')}>{t('footer.privacy')}</a>
+    </li>
+    <li>
+      <a href={localizePath(lang, '/legal-notice')} aria-label={t('footer.legal')}>{t('footer.legal')}</a>
+    </li>
+  </ul>
+</footer>

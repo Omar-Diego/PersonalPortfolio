@@ -1,0 +1,44 @@
+---
+import Icon from './Icon.astro';
+import { getLang, useTranslations } from '../i18n/utils';
+import { content } from '../i18n/content';
+
+const lang = getLang(Astro.currentLocale);
+const t = useTranslations(lang);
+const { socials } = content[lang];
+---
+
+<section class="section-wrapper" id="contact">
+  <div class="contact-wrapper">
+    <div class="reveal">
+      <h4 class="contact-title">
+        {t('contact.title')}<span>.</span>
+      </h4>
+    </div>
+    <div class="reveal">
+      <p class="contact-copy">
+        {lang === 'es' ? (
+          <>
+            ¿Tienes un proyecto en mente o una oportunidad para conversar? Escríbeme un correo, también puedes encontrarme en{' '}
+            <a href={socials.linkedin} target="_blank" rel="nofollow" aria-label={t('navbar.aria.linkedin')}>
+              LinkedIn
+            </a>.
+          </>
+        ) : (
+          <>
+            Have a project in mind or an opportunity to discuss? Send me an email — you can also find me on{' '}
+            <a href={socials.linkedin} target="_blank" rel="nofollow" aria-label={t('navbar.aria.linkedin')}>
+              LinkedIn
+            </a>.
+          </>
+        )}
+      </p>
+    </div>
+    <div class="contact-links reveal">
+      <a class="contact-link" href={`mailto:${socials.email}`} target="_blank" rel="nofollow" aria-label={t('contact.aria.email')}>
+        <Icon name="mail" size="2.4rem" />
+        <span>{socials.email}</span>
+      </a>
+    </div>
+  </div>
+</section>

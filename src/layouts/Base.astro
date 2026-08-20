@@ -1,0 +1,52 @@
+---
+import '@fontsource/poppins/200.css';
+import '@fontsource/poppins/300.css';
+import '@fontsource/poppins/400.css';
+import '@fontsource/poppins/500.css';
+import '@fontsource/poppins/600.css';
+import '@fontsource/poppins/700.css';
+import '@fontsource/poppins/900.css';
+import '../styles/global.css';
+import Cursor from '../components/Cursor.astro';
+import { getLang } from '../i18n/utils';
+import { content } from '../i18n/content';
+
+const lang = getLang(Astro.currentLocale);
+const { hero, about } = content[lang];
+const siteTitle = `Omar Diego — ${hero.tagline}`;
+
+interface Props {
+  title?: string;
+  description?: string;
+}
+
+const { title = siteTitle, description = about.p1 } = Astro.props;
+---
+
+<!doctype html>
+<html lang={lang}>
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=2" />
+    <link rel="icon" href="/favicon.ico" />
+    <title>{title}</title>
+    <meta name="description" content={description} />
+    <meta property="og:title" content={title} />
+    <meta property="og:description" content={description} />
+    <meta property="og:type" content="website" />
+    <meta name="twitter:card" content="summary_large_image" />
+    <meta name="twitter:title" content={title} />
+    <meta name="twitter:description" content={description} />
+    <script is:inline>
+      (function () {
+        var stored = localStorage.getItem('theme');
+        var theme = stored === 'light' || stored === 'dark' ? stored : 'light';
+        document.documentElement.setAttribute('data-theme', theme);
+      })();
+    </script>
+  </head>
+  <body id="root">
+    <slot />
+    <Cursor />
+  </body>
+</html>

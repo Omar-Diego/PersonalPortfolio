@@ -1,0 +1,21 @@
+---
+interface Props {
+  title: string;
+  dir?: 'l' | 'r';
+}
+
+const { title, dir = 'r' } = Astro.props;
+const flexDirection = dir === 'r' ? 'row' : 'row-reverse';
+---
+
+<div class="section-header" style={`flex-direction: ${flexDirection}`}>
+  <div class="section-header-line"></div>
+  <h3>
+    <span class="reveal-line scroll-reveal" style="display: block">
+      <span class="section-header-title reveal-line-inner">
+        {title}<span>.</span>
+      </span>
+      <span class="reveal-curtain" style="top: 0; bottom: 0"></span>
+    </span>
+  </h3>
+</div>

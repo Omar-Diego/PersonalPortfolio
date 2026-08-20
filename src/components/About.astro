@@ -1,0 +1,54 @@
+---
+import SectionHeader from './SectionHeader.astro';
+import Icon from './Icon.astro';
+import { getLang, useTranslations } from '../i18n/utils';
+import { content } from '../i18n/content';
+
+const lang = getLang(Astro.currentLocale);
+const t = useTranslations(lang);
+const { about, stack, socials } = content[lang];
+---
+
+<section class="section-wrapper" id="about">
+  <SectionHeader title={t('about.title')} dir="l" />
+  <div class="about reveal">
+    <div>
+      <p class="about-text">{about.p1}</p>
+      <p class="about-text">{about.p2}</p>
+      <p class="about-text">{about.p3}</p>
+      <div class="about-links">
+        <div class="about-links-text">
+          <span>{t('about.links')}</span>
+          <Icon name="arrowUp" size="2rem" class="about-links-arrow" />
+        </div>
+        <div class="socials">
+          <a href={socials.linkedin} target="_blank" rel="nofollow" title="LinkedIn" aria-label={t('navbar.aria.linkedin')}>
+            <Icon name="linkedin" size="2.4rem" />
+          </a>
+          <a href={socials.github} target="_blank" rel="nofollow" title="GitHub" aria-label={t('navbar.aria.github')}>
+            <Icon name="github" size="2.4rem" />
+          </a>
+          <a href={`mailto:${socials.email}`} target="_blank" rel="nofollow" title="Email" aria-label={t('navbar.aria.email')}>
+            <Icon name="mail" size="2.4rem" />
+          </a>
+        </div>
+      </div>
+    </div>
+
+    <div class="stats">
+      <div class="stats-column">
+        <h4>
+          <Icon name="code" size="2.4rem" />
+          <span>{t('about.stack')}</span>
+        </h4>
+        <div class="stats-grid">
+          {
+            stack.map((tech) => (
+              <span class="chip">{tech}</span>
+            ))
+          }
+        </div>
+      </div>
+    </div>
+  </div>
+</section>

@@ -1,0 +1,100 @@
+---
+import Base from '../layouts/Base.astro';
+import Navbar from '../components/Navbar.astro';
+import SectionHeader from '../components/SectionHeader.astro';
+import Footer from '../components/Footer.astro';
+import Reveal from '../components/Reveal.astro';
+import { getLang } from '../i18n/utils';
+import { content } from '../i18n/content';
+
+const lang = getLang(Astro.currentLocale);
+const { socials } = content[lang];
+
+const copy =
+  lang === 'es'
+    ? {
+        pageTitle: 'Aviso Legal',
+        responsibleTitle: 'Responsable del sitio',
+        name: 'Omar Sebastián Diego Cortés',
+        location: 'Querétaro, México',
+        hostingTitle: 'Hosting',
+        hostingProvider: 'Vercel Inc.',
+        hostingAddress: '440 N Barranca Ave #4133, Covina, CA 91723, Estados Unidos',
+        ipTitle: 'Propiedad Intelectual',
+        ipText:
+          'Todo el contenido de este sitio (textos, imágenes, logos, etc.) es propiedad exclusiva de Omar Sebastián Diego Cortés, salvo que se indique lo contrario. Su reproducción, distribución o uso sin autorización previa está prohibido.',
+        respTitle: 'Responsabilidad',
+        respText1: 'El propietario del sitio no se hace responsable de daños derivados del uso de este sitio, incluyendo interrupciones o errores.',
+        respText2: 'Los enlaces externos presentes en este sitio no implican ninguna responsabilidad sobre su contenido.',
+        lawTitle: 'Ley Aplicable',
+        lawText: 'Este sitio es operado desde Querétaro, México. Cualquier disputa derivada de su uso se regirá por las leyes de México.',
+        contactTitle: 'Contacto',
+        contactText: 'Para cualquier pregunta o solicitud, contáctame en:',
+      }
+    : {
+        pageTitle: 'Legal Notice',
+        responsibleTitle: 'Responsible for the Website',
+        name: 'Omar Sebastián Diego Cortés',
+        location: 'Querétaro, Mexico',
+        hostingTitle: 'Hosting',
+        hostingProvider: 'Vercel Inc.',
+        hostingAddress: '440 N Barranca Ave #4133, Covina, CA 91723, United States',
+        ipTitle: 'Intellectual Property',
+        ipText:
+          'All content on this site (texts, images, logos, etc.) is the exclusive property of Omar Sebastián Diego Cortés, unless stated otherwise. Reproduction, distribution, or use without prior written permission is prohibited.',
+        respTitle: 'Responsibilities',
+        respText1: 'The site owner is not responsible for damages resulting from the use of this site, including interruptions or bugs.',
+        respText2: 'External links on this site do not imply any responsibility for their content.',
+        lawTitle: 'Governing Law',
+        lawText: 'This website is operated from Querétaro, Mexico. Any disputes arising from its use shall be governed by the laws of Mexico.',
+        contactTitle: 'Contact',
+        contactText: 'For any questions or requests, contact me at:',
+      };
+---
+
+<Base title={`${copy.pageTitle} — Omar Diego`} description={copy.ipText}>
+  <div class="home">
+    <main>
+      <Navbar />
+      <section class="legal">
+        <SectionHeader title={copy.pageTitle} dir="r" />
+
+        <h2>{copy.responsibleTitle}</h2>
+        <p>
+          <strong>{lang === 'es' ? 'Nombre:' : 'Name:'}</strong> {copy.name}
+        </p>
+        <p>
+          <strong>{lang === 'es' ? 'Ubicación:' : 'Location:'}</strong> {copy.location}
+        </p>
+        <p>
+          <strong>Email:</strong>{' '}
+          <a href={`mailto:${socials.email}`} target="_blank" rel="nofollow" aria-label={copy.contactTitle}>{socials.email}</a>
+        </p>
+
+        <h2>{copy.hostingTitle}</h2>
+        <p>
+          <strong>{lang === 'es' ? 'Proveedor:' : 'Provider:'}</strong> {copy.hostingProvider}
+        </p>
+        <p>
+          <strong>{lang === 'es' ? 'Dirección:' : 'Address:'}</strong> {copy.hostingAddress}
+        </p>
+
+        <h2>{copy.ipTitle}</h2>
+        <p>{copy.ipText}</p>
+
+        <h2>{copy.respTitle}</h2>
+        <p>{copy.respText1}</p>
+        <p>{copy.respText2}</p>
+
+        <h2>{copy.lawTitle}</h2>
+        <p>{copy.lawText}</p>
+
+        <h2>{copy.contactTitle}</h2>
+        <p>{copy.contactText}</p>
+        <a href={`mailto:${socials.email}`} target="_blank" rel="nofollow" aria-label={copy.contactTitle}>{socials.email}</a>
+      </section>
+      <Footer />
+    </main>
+  </div>
+  <Reveal />
+</Base>

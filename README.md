@@ -1,43 +1,35 @@
-# Astro Starter Kit: Minimal
+# Franck Vukelic — Portfolio (Astro)
 
-```sh
-npm create astro@latest -- --template minimal
+Clone de [fvukelic.com](https://fvukelic.com/) reconstruido con **Astro** (estático, sin frameworks de UI). Es un portfolio personal de desarrollador full-stack con las mismas secciones, textos, imágenes y estilos que el sitio original.
+
+## Páginas
+
+| Ruta            | Contenido                                              |
+| --------------- | ------------------------------------------------------ |
+| `/`             | Inicio: Hero, About + Stack, Projects, Experience, Certification, Contact |
+| `/gallery`      | Galería completa de proyectos con filtros (💜, App, Design, Next, React, Mobile) |
+| `/privacy`      | Política de privacidad                                 |
+| `/legal-notice` | Aviso legal                                            |
+
+## Stack
+
+- [Astro](https://astro.build) (salida estática)
+- CSS puro con variables de diseño (sin Tailwind)
+- Fuente [Poppins](https://fontsource.org/fonts/poppins) autoalojada vía `@fontsource/poppins`
+- JavaScript vanilla para: reveal al hacer scroll, menú lateral con sección activa, modales de proyectos y filtros de la galería
+
+## Desarrollo
+
+```bash
+npm install
+npm run dev        # servidor de desarrollo
+npm run build      # build estático en dist/
+npm run preview    # previsualizar el build
 ```
 
-> 🧑‍🚀 **Seasoned astronaut?** Delete this file. Have fun!
+## Notas sobre el clon
 
-## 🚀 Project Structure
-
-Inside of your Astro project, you'll see the following folders and files:
-
-```text
-/
-├── public/
-├── src/
-│   └── pages/
-│       └── index.astro
-└── package.json
-```
-
-Astro looks for `.astro` or `.md` files in the `src/pages/` directory. Each page is exposed as a route based on its file name.
-
-There's nothing special about `src/components/`, but that's where we like to put any Astro/React/Vue/Svelte/Preact components.
-
-Any static assets, like images, can be placed in the `public/` directory.
-
-## 🧞 Commands
-
-All commands are run from the root of the project, from a terminal:
-
-| Command                   | Action                                           |
-| :------------------------ | :----------------------------------------------- |
-| `npm install`             | Installs dependencies                            |
-| `npm run dev`             | Starts local dev server at `localhost:4321`      |
-| `npm run build`           | Build your production site to `./dist/`          |
-| `npm run preview`         | Preview your build locally, before deploying     |
-| `npm run astro ...`       | Run CLI commands like `astro add`, `astro check` |
-| `npm run astro -- --help` | Get help using the Astro CLI                     |
-
-## 👀 Want to learn more?
-
-Feel free to check [our documentation](https://docs.astro.build) or jump into our [Discord server](https://astro.build/chat).
+- **Un solo idioma (inglés)**: el sitio original tiene versión EN/FR con selector de idioma. Este clon incluye solo la versión en inglés; el selector de idioma del navbar se omitió.
+- Las animaciones de la web original (framer-motion/GSAP) se recrearon con CSS y JavaScript vanilla.
+- Los 78 proyectos de la galería y sus imágenes (`public/gallery/`) se descargaron del sitio original.
+- Los enlaces externos (CV, Calendly, repos de GitHub, demos) apuntan a los destinos originales.
