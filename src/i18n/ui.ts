@@ -48,8 +48,11 @@ export const ui = {
     'experience.title': 'Experiencia',
 
     'certification.title': 'Certificaciones',
-    'certification.certificate': 'Certificado',
-    'certification.aria.certificate': 'Ver certificado',
+    'certification.badgesNote': 'Credenciales y certificaciones verificadas. Haz clic en cualquier insignia de Credly para abrir su verificación.',
+    'certification.verify': 'Verificar',
+    'certification.badgesProfile': 'Ver perfil de Credly',
+    'certification.aria.badge': 'Ver insignia en Credly',
+    'certification.aria.badgesProfile': 'Ver mi perfil completo de Credly',
 
     'contact.title': 'Contacto',
     'contact.aria.email': 'Envíame un correo',
@@ -105,8 +108,11 @@ export const ui = {
     'experience.title': 'Experience',
 
     'certification.title': 'Certification',
-    'certification.certificate': 'Certificate',
-    'certification.aria.certificate': 'View certificate',
+    'certification.badgesNote': 'Verified credentials and certifications. Click any Credly badge to open its verification.',
+    'certification.verify': 'Verify',
+    'certification.badgesProfile': 'View Credly profile',
+    'certification.aria.badge': 'View badge on Credly',
+    'certification.aria.badgesProfile': 'View my full Credly profile',
 
     'contact.title': 'Contact',
     'contact.aria.email': 'Send me an email',

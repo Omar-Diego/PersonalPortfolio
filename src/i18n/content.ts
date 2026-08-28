@@ -17,13 +17,21 @@ export interface Experience {
   tech: string[];
 }
 
-export interface Certification {
-  title: string;
-  school: string;
+export interface Credential {
+  name: string;
+  issuer: string;
   date: string;
-  link?: string;
   description: string;
-  tech: string[];
+  /** Badge artwork; when absent the card shows a generic certificate icon. */
+  img?: string;
+  /** Public verification URL; when absent the card is not clickable. */
+  url?: string;
+}
+
+type LocalizedText = { es: string; en: string };
+
+interface CredentialSource extends Omit<Credential, 'description'> {
+  description: LocalizedText;
 }
 
 export interface Content {
@@ -48,7 +56,8 @@ export interface Content {
   stack: string[];
   projects: Project[];
   experience: Experience[];
-  certifications: Certification[];
+  credlyProfile: string;
+  credentials: Credential[];
 }
 
 const socials = {
@@ -57,6 +66,279 @@ const socials = {
   email: 'omardiegodc@proton.me',
   cv: '/docs/omar-diego-cv.pdf',
 };
+
+const credlyProfile = 'https://www.credly.com/users/omar-sebastian-diego-cortes';
+
+// Verified digital credentials from Credly. Each URL points to the unique,
+// publicly verifiable badge page (which links to its certificate).
+const credlyBadges: CredentialSource[] = [
+  {
+    name: 'Desarrollo Full Stack',
+    issuer: 'Universidad Tecmilenio',
+    date: '06/2026',
+    description: {
+      es: 'Desarrollo web de extremo a extremo: interfaces, APIs, lógica de servidor y bases de datos.',
+      en: 'End-to-end web development: interfaces, APIs, server logic, and databases.',
+    },
+    img: '/badges/desarrollo-full-stack.png',
+    url: 'https://www.credly.com/badges/2e127c28-a3a1-4128-90e3-9ba6d1190557/public_url',
+  },
+  {
+    name: 'Fundamentos de DevOps',
+    issuer: 'Universidad Tecmilenio',
+    date: '06/2026',
+    description: {
+      es: 'Cultura y prácticas DevOps: integración y entrega continua, automatización y colaboración.',
+      en: 'DevOps culture and practices: continuous integration and delivery, automation, and collaboration.',
+    },
+    img: '/badges/fundamentos-de-devops.png',
+    url: 'https://www.credly.com/badges/12395d2a-6d14-4550-a53a-40abc919bb7d/public_url',
+  },
+  {
+    name: 'Gestión de Redes',
+    issuer: 'Universidad Tecmilenio',
+    date: '06/2026',
+    description: {
+      es: 'Administración y monitoreo de redes: configuración de dispositivos, protocolos y seguridad.',
+      en: 'Network administration and monitoring: device configuration, protocols, and security.',
+    },
+    img: '/badges/gestion-de-redes.png',
+    url: 'https://www.credly.com/badges/18eed810-6356-47fe-887e-c78c9b8340f4/public_url',
+  },
+  {
+    name: 'Certified SOLIDWORKS Design Associate',
+    issuer: 'Dassault Systèmes',
+    date: '05/2026',
+    description: {
+      es: 'Modelado paramétrico 3D y diseño de piezas y ensambles en SOLIDWORKS.',
+      en: 'Parametric 3D modeling and design of parts and assemblies in SOLIDWORKS.',
+    },
+    img: '/badges/solidworks-design-associate.png',
+    url: 'https://www.credly.com/badges/14893b45-5eb5-43a1-bd8d-6244f9972506/public_url',
+  },
+  {
+    name: 'AWS Academy Graduate — Cloud Operations',
+    issuer: 'Amazon Web Services',
+    date: '04/2026',
+    description: {
+      es: 'Operación en la nube de AWS: monitoreo, automatización, redes y gestión de costos.',
+      en: 'AWS cloud operations: monitoring, automation, networking, and cost management.',
+    },
+    img: '/badges/aws-cloud-operations.png',
+    url: 'https://www.credly.com/badges/7eeb171e-bd00-4498-a1f6-11b7845341f7/public_url',
+  },
+  {
+    name: 'Networking Basics',
+    issuer: 'Cisco',
+    date: '02/2026',
+    description: {
+      es: 'Fundamentos de redes: modelos OSI/TCP-IP, direccionamiento IP y dispositivos de red.',
+      en: 'Networking fundamentals: OSI/TCP-IP models, IP addressing, and network devices.',
+    },
+    img: '/badges/networking-basics.png',
+    url: 'https://www.credly.com/badges/5e770dbf-bde6-4f19-bd7e-e77bb62f0947/public_url',
+  },
+  {
+    name: 'Web Development Fundamentals',
+    issuer: 'IBM SkillsBuild',
+    date: '02/2026',
+    description: {
+      es: 'Fundamentos del desarrollo web: HTML, CSS y JavaScript.',
+      en: 'Web development fundamentals: HTML, CSS, and JavaScript.',
+    },
+    img: '/badges/web-development-fundamentals.png',
+    url: 'https://www.credly.com/badges/2c34bac0-373f-4fc9-acfa-bd993ce292de/public_url',
+  },
+  {
+    name: 'Ciencia de Datos',
+    issuer: 'Universidad Tecmilenio',
+    date: '01/2026',
+    description: {
+      es: 'Flujo de trabajo de ciencia de datos: análisis exploratorio, visualización y modelos predictivos.',
+      en: 'Data science workflow: exploratory analysis, visualization, and predictive models.',
+    },
+    img: '/badges/ciencia-de-datos.png',
+    url: 'https://www.credly.com/badges/19bcd19e-90f6-4b33-9e6f-391b5525b946/public_url',
+  },
+  {
+    name: 'Computación en la Nube',
+    issuer: 'Universidad Tecmilenio',
+    date: '01/2026',
+    description: {
+      es: 'Conceptos de cómputo en la nube: modelos de servicio, despliegue y virtualización.',
+      en: 'Cloud computing concepts: service models, deployment, and virtualization.',
+    },
+    img: '/badges/computacion-en-la-nube.png',
+    url: 'https://www.credly.com/badges/15198a84-1665-4776-b936-15616ee28458/public_url',
+  },
+  {
+    name: 'Fundamentos de Programación',
+    issuer: 'Universidad Tecmilenio',
+    date: '01/2026',
+    description: {
+      es: 'Lógica de programación: variables, estructuras de control, funciones y algoritmos.',
+      en: 'Programming logic: variables, control structures, functions, and algorithms.',
+    },
+    img: '/badges/fundamentos-de-programacion.png',
+    url: 'https://www.credly.com/badges/89184148-c520-4112-8f51-76d1bbe4d5ff/public_url',
+  },
+  {
+    name: 'Inglés Intermedio Alto',
+    issuer: 'Universidad Tecmilenio',
+    date: '01/2026',
+    description: {
+      es: 'Competencia en inglés nivel B2: comprensión y comunicación en contextos profesionales.',
+      en: 'B2-level English proficiency: comprehension and communication in professional contexts.',
+    },
+    img: '/badges/ingles-intermedio-alto.png',
+    url: 'https://www.credly.com/badges/fe9c6ef0-01ec-415f-82b6-19e526e04d95/public_url',
+  },
+  {
+    name: 'Probabilidad y Estadística para la Ciencia de Datos',
+    issuer: 'Universidad Tecmilenio',
+    date: '01/2026',
+    description: {
+      es: 'Estadística aplicada: probabilidad, distribuciones e inferencia para el análisis de datos.',
+      en: 'Applied statistics: probability, distributions, and inference for data analysis.',
+    },
+    img: '/badges/probabilidad-y-estadistica.png',
+    url: 'https://www.credly.com/badges/6d4f70d0-a4cb-4fcc-954c-64b2a4e55145/public_url',
+  },
+  {
+    name: 'Programación Orientada a Objetos',
+    issuer: 'Universidad Tecmilenio',
+    date: '01/2026',
+    description: {
+      es: 'Diseño con POO: clases, herencia, polimorfismo y encapsulamiento.',
+      en: 'OOP design: classes, inheritance, polymorphism, and encapsulation.',
+    },
+    img: '/badges/programacion-orientada-a-objetos.png',
+    url: 'https://www.credly.com/badges/abb46e74-11c4-40b7-85b6-6a58f06d5d31/public_url',
+  },
+  {
+    name: 'Sistemas Operativos',
+    issuer: 'Universidad Tecmilenio',
+    date: '01/2026',
+    description: {
+      es: 'Fundamentos de sistemas operativos: procesos, memoria, sistemas de archivos y concurrencia.',
+      en: 'Operating system fundamentals: processes, memory, file systems, and concurrency.',
+    },
+    img: '/badges/sistemas-operativos.png',
+    url: 'https://www.credly.com/badges/4247d1bb-994c-4893-830a-7c1cad2f8e53/public_url',
+  },
+  {
+    name: 'Metodologías Ágiles',
+    issuer: 'Universidad Tecmilenio',
+    date: '12/2025',
+    description: {
+      es: 'Marcos ágiles: Scrum, Kanban y gestión iterativa de proyectos.',
+      en: 'Agile frameworks: Scrum, Kanban, and iterative project management.',
+    },
+    img: '/badges/metodologias-agiles.png',
+    url: 'https://www.credly.com/badges/07e54783-ed24-4d3b-8278-dc456a4c3aa0/public_url',
+  },
+  {
+    name: 'Bases de Datos',
+    issuer: 'Universidad Tecmilenio',
+    date: '10/2025',
+    description: {
+      es: 'Diseño y consulta de bases de datos relacionales con SQL y modelado entidad-relación.',
+      en: 'Relational database design and querying with SQL and entity-relationship modeling.',
+    },
+    img: '/badges/bases-de-datos.png',
+    url: 'https://www.credly.com/badges/a1a4a289-f67e-4fa5-9ec4-48dba4ef9d91/public_url',
+  },
+  {
+    name: 'Estructura de Datos',
+    issuer: 'Universidad Tecmilenio',
+    date: '10/2025',
+    description: {
+      es: 'Estructuras de datos y algoritmos: listas, árboles, grafos y análisis de complejidad.',
+      en: 'Data structures and algorithms: lists, trees, graphs, and complexity analysis.',
+    },
+    img: '/badges/estructura-de-datos.png',
+    url: 'https://www.credly.com/badges/a696b963-ebb3-419f-9846-fdcb5085053d/public_url',
+  },
+  {
+    name: 'Introduction to Data Science',
+    issuer: 'Cisco',
+    date: '04/2025',
+    description: {
+      es: 'Introducción a los conceptos y el flujo de trabajo de la ciencia de datos.',
+      en: 'Introduction to data science concepts and workflow.',
+    },
+    img: '/badges/introduction-to-data-science.png',
+    url: 'https://www.credly.com/badges/ff89e372-0e01-4ce9-9914-edddf820b7a3/public_url',
+  },
+  {
+    name: 'Python Essentials 1',
+    issuer: 'Cisco',
+    date: '09/2024',
+    description: {
+      es: 'Fundamentos de Python: sintaxis, tipos de datos, estructuras de control y funciones.',
+      en: 'Python fundamentals: syntax, data types, control structures, and functions.',
+    },
+    img: '/badges/python-essentials-1.png',
+    url: 'https://www.credly.com/badges/4c485639-c006-443a-bbeb-a593bbedfcfc/public_url',
+  },
+  {
+    name: 'AWS Academy Graduate — Cloud Foundations',
+    issuer: 'Amazon Web Services',
+    date: '09/2024',
+    description: {
+      es: 'Conceptos fundamentales de la nube de AWS: cómputo, almacenamiento, redes y precios.',
+      en: 'Core AWS cloud concepts: compute, storage, networking, and pricing.',
+    },
+    img: '/badges/aws-cloud-foundations.png',
+    url: 'https://www.credly.com/badges/b5c314dc-cbc7-4365-b346-ad296dab574f/public_url',
+  },
+];
+
+// Certifications without a Credly badge. No public verification URL on file, so
+// their cards render with a generic certificate icon and are not clickable.
+const otherCertifications: CredentialSource[] = [
+  {
+    name: 'Java Fundamentals',
+    issuer: 'Oracle Academy',
+    date: '03/2025',
+    description: {
+      es: 'Fundamentos de Java y programación orientada a objetos.',
+      en: 'Java fundamentals and object-oriented programming.',
+    },
+  },
+  {
+    name: 'Red Hat System Administration I (RH124)',
+    issuer: 'Red Hat',
+    date: '03/2025',
+    description: {
+      es: 'Administración de sistemas Linux: línea de comandos, usuarios, procesos y servicios.',
+      en: 'Linux system administration: command line, users, processes, and services.',
+    },
+  },
+  {
+    name: 'IT Security Foundations: Operating System Security',
+    issuer: 'LinkedIn Learning',
+    date: '02/2025',
+    description: {
+      es: 'Fundamentos de seguridad en sistemas operativos: control de acceso, permisos y hardening.',
+      en: 'Operating system security fundamentals: access control, permissions, and hardening.',
+    },
+  },
+];
+
+// MM/YYYY -> sortable integer (YYYYMM), newest first.
+const byDateDesc = (a: Credential, b: Credential) => {
+  const key = (d: string) => {
+    const [m, y] = d.split('/');
+    return Number(y) * 100 + Number(m);
+  };
+  return key(b.date) - key(a.date);
+};
+
+const buildCredentials = (lang: 'es' | 'en'): Credential[] =>
+  [...credlyBadges, ...otherCertifications]
+    .map(({ description, ...rest }) => ({ ...rest, description: description[lang] }))
+    .sort(byDateDesc);
 
 export const content: Record<'es' | 'en', Content> = {
   es: {
@@ -151,64 +433,8 @@ export const content: Record<'es' | 'en', Content> = {
         tech: ['Modelado 3D', 'Renderizado', 'Hojas de despiece'],
       },
     ],
-    certifications: [
-      {
-        title: 'Python Essentials 1',
-        school: 'Cisco Networking Academy',
-        date: '09/2024',
-        description: 'Fundamentos de Python: sintaxis, tipos de datos, estructuras de control y funciones.',
-        tech: ['Python'],
-      },
-      {
-        title: 'AWS Academy Cloud Foundations',
-        school: 'Amazon Web Services (AWS Academy)',
-        date: '09/2024',
-        description: 'Conceptos fundamentales de la nube de AWS: cómputo, almacenamiento, redes y precios.',
-        tech: ['AWS'],
-      },
-      {
-        title: 'Java Fundamentals',
-        school: 'Oracle Academy',
-        date: '03/2025',
-        description: 'Fundamentos de Java y programación orientada a objetos.',
-        tech: ['Java', 'POO'],
-      },
-      {
-        title: 'IT Security Foundations: Operating System Security',
-        school: 'LinkedIn Learning',
-        date: '02/2025',
-        description: 'Fundamentos de seguridad en sistemas operativos.',
-        tech: ['Seguridad', 'OS'],
-      },
-      {
-        title: 'Red Hat System Administration I (RH124)',
-        school: 'Red Hat',
-        date: '03/2025',
-        description: 'Administración de sistemas Linux: línea de comandos, usuarios, procesos y servicios.',
-        tech: ['Linux', 'Red Hat'],
-      },
-      {
-        title: 'Introduction to Data Science',
-        school: 'Cisco Networking Academy',
-        date: '04/2025',
-        description: 'Introducción a los conceptos y el flujo de trabajo de la ciencia de datos.',
-        tech: ['Data Science'],
-      },
-      {
-        title: 'Web Development Fundamentals',
-        school: 'IBM SkillsBuild',
-        date: '02/2026',
-        description: 'Fundamentos del desarrollo web: HTML, CSS y JavaScript.',
-        tech: ['HTML', 'CSS', 'JavaScript'],
-      },
-      {
-        title: 'Networking Basics',
-        school: 'Cisco Networking Academy',
-        date: '02/2026',
-        description: 'Fundamentos de redes: modelos OSI/TCP-IP, direccionamiento IP y dispositivos de red.',
-        tech: ['Networking', 'Cisco'],
-      },
-    ],
+    credlyProfile,
+    credentials: buildCredentials('es'),
   },
   en: {
     socials,
@@ -302,63 +528,7 @@ export const content: Record<'es' | 'en', Content> = {
         tech: ['3D Modeling', 'Rendering', 'Cut Lists'],
       },
     ],
-    certifications: [
-      {
-        title: 'Python Essentials 1',
-        school: 'Cisco Networking Academy',
-        date: '09/2024',
-        description: 'Python fundamentals: syntax, data types, control structures, and functions.',
-        tech: ['Python'],
-      },
-      {
-        title: 'AWS Academy Cloud Foundations',
-        school: 'Amazon Web Services (AWS Academy)',
-        date: '09/2024',
-        description: 'Core AWS cloud concepts: compute, storage, networking, and pricing.',
-        tech: ['AWS'],
-      },
-      {
-        title: 'Java Fundamentals',
-        school: 'Oracle Academy',
-        date: '03/2025',
-        description: 'Java fundamentals and object-oriented programming.',
-        tech: ['Java', 'OOP'],
-      },
-      {
-        title: 'IT Security Foundations: Operating System Security',
-        school: 'LinkedIn Learning',
-        date: '02/2025',
-        description: 'Operating system security fundamentals.',
-        tech: ['Security', 'OS'],
-      },
-      {
-        title: 'Red Hat System Administration I (RH124)',
-        school: 'Red Hat',
-        date: '03/2025',
-        description: 'Linux system administration: command line, users, processes, and services.',
-        tech: ['Linux', 'Red Hat'],
-      },
-      {
-        title: 'Introduction to Data Science',
-        school: 'Cisco Networking Academy',
-        date: '04/2025',
-        description: 'Introduction to data science concepts and workflow.',
-        tech: ['Data Science'],
-      },
-      {
-        title: 'Web Development Fundamentals',
-        school: 'IBM SkillsBuild',
-        date: '02/2026',
-        description: 'Web development fundamentals: HTML, CSS, and JavaScript.',
-        tech: ['HTML', 'CSS', 'JavaScript'],
-      },
-      {
-        title: 'Networking Basics',
-        school: 'Cisco Networking Academy',
-        date: '02/2026',
-        description: 'Networking fundamentals: OSI/TCP-IP models, IP addressing, and network devices.',
-        tech: ['Networking', 'Cisco'],
-      },
-    ],
+    credlyProfile,
+    credentials: buildCredentials('en'),
   },
 };

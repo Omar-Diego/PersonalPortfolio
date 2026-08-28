@@ -1554,63 +1554,136 @@ input[type="submit"] {
   gap: 1.2rem;
 }
 
-.certification-item {
-  margin-bottom: 2.4rem;
-  padding: 0 1.2rem 2.4rem;
-  border-bottom: 1px solid var(--background-light);
+/* ============================================================
+   Credly badges
+   ============================================================ */
+.badges {
+  margin-top: 2.4rem;
 }
 
-@media (max-width: 480px) {
-  .certification-item {
-    padding: 0 0 2.4rem;
-  }
-}
-
-.certification-heading {
+.badges-heading {
   display: flex;
-  align-items: center;
+  align-items: baseline;
   justify-content: space-between;
-  margin-bottom: 1.2rem;
+  flex-wrap: wrap;
+  gap: 0.8rem 1.6rem;
+  margin-bottom: 2.4rem;
 }
 
-@media (max-width: 600px) {
-  .certification-heading {
-    flex-direction: column;
-    align-items: start;
-  }
-}
-
-.certification-title {
-  font-family: var(--font-heading);
-  font-size: var(--text-md);
-  font-weight: 700;
-}
-
-.certification-school {
-  color: var(--brand);
-  font-weight: 700;
-}
-
-.certification-certificate {
-  transition: 0.2s;
+.badges-profile {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.5rem;
   color: var(--brand);
   font-weight: 500;
+  transition: opacity 0.2s;
 }
 
-.certification-certificate:hover {
-  color: var(--brand);
+.badges-profile:hover {
   opacity: 0.8;
 }
 
-.certification-description {
-  margin-bottom: 1.8rem;
+.badges-note {
+  max-width: 52ch;
   font-weight: 200;
+  font-size: var(--text-xs);
+  opacity: 0.8;
 }
 
-.certification-tech {
+.badge-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(320px, 1fr));
+  gap: 1.6rem;
+}
+
+@media (max-width: 380px) {
+  .badge-grid {
+    grid-template-columns: 1fr;
+  }
+}
+
+.badge-card a,
+.badge-card .badge-static {
   display: flex;
-  flex-wrap: wrap;
-  gap: 1.2rem;
+  gap: 1.6rem;
+  height: 100%;
+  padding: 1.6rem;
+  border: 1px solid var(--background-light);
+  border-radius: 1.2rem;
+  transition:
+    transform 0.2s ease,
+    border-color 0.2s ease,
+    background-color 0.2s ease;
+}
+
+.badge-card a:hover,
+.badge-card a:focus-visible {
+  transform: translateY(-4px);
+  border-color: var(--brand);
+  background: var(--background-light);
+}
+
+.badge-static {
+  cursor: default;
+}
+
+.badge-img {
+  flex-shrink: 0;
+  width: 72px;
+  height: 72px;
+  object-fit: contain;
+}
+
+.badge-img-fallback {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: var(--brand);
+}
+
+.badge-body {
+  display: flex;
+  flex-direction: column;
+  gap: 0.2rem;
+  min-width: 0;
+}
+
+.badge-name {
+  font-family: var(--font-heading);
+  font-size: var(--text-sm);
+  font-weight: 700;
+  line-height: 1.25;
+}
+
+.badge-meta {
+  font-size: 1.3rem;
+  font-weight: 200;
+  opacity: 0.7;
+}
+
+.badge-desc {
+  margin-top: 0.6rem;
+  font-size: var(--text-xs);
+  font-weight: 200;
+  line-height: 1.45;
+  opacity: 0.9;
+}
+
+.badge-verify {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.4rem;
+  margin-top: 1rem;
+  color: var(--brand);
+  font-size: var(--text-xs);
+  font-weight: 500;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .badge-card a:hover,
+  .badge-card a:focus-visible {
+    transform: none;
+  }
 }
 
 /* ============================================================

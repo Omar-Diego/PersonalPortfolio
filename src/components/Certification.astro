@@ -1,39 +1,89 @@
 ---
 import SectionHeader from './SectionHeader.astro';
+import Icon from './Icon.astro';
 import { getLang, useTranslations } from '../i18n/utils';
 import { content } from '../i18n/content';
 
 const lang = getLang(Astro.currentLocale);
 const t = useTranslations(lang);
-const { certifications } = content[lang];
+const { credentials, credlyProfile } = content[lang];
 ---
 
 <section class="section-wrapper" id="certification">
   <SectionHeader title={t('certification.title')} dir="l" />
-  {
-    certifications.map((cert, index) => (
-      <div class="certification-item reveal" style={`transition-delay: ${index * 0.1}s`}>
-        <div class="certification-heading">
-          <span class="certification-title">{cert.title}</span>
-          <span>{cert.date}</span>
-        </div>
-        <div class="certification-heading">
-          <span class="certification-school">{cert.school}</span>
-          {cert.link && (
-            <a class="certification-certificate" href={cert.link} target="_blank" rel="nofollow" title={t('certification.aria.certificate')} aria-label={t('certification.aria.certificate')}>
-              {t('certification.certificate')}
-            </a>
-          )}
-        </div>
-        <p class="certification-description">{cert.description}</p>
-        <div class="certification-tech">
-          {
-            cert.tech.map((tech) => (
-              <span class="chip">{tech}</span>
-            ))
-          }
-        </div>
-      </div>
-    ))
-  }
+
+  <div class="badges reveal">
+    <div class="badges-heading">
+      <p class="badges-note">{t('certification.badgesNote')}</p>
+      <a
+        class="badges-profile"
+        href={credlyProfile}
+        target="_blank"
+        rel="noopener nofollow"
+        aria-label={t('certification.aria.badgesProfile')}
+      >
+        {t('certification.badgesProfile')}
+        <Icon name="external" size="1.6rem" />
+      </a>
+    </div>
+
+    <ul class="badge-grid">
+      {
+        credentials.map((cred) => {
+          const label = `${cred.name} — ${cred.issuer}`;
+          const media = cred.img ? (
+            <img
+              class="badge-img"
+              src={cred.img}
+              alt={label}
+              width="72"
+              height="72"
+              loading="lazy"
+              decoding="async"
+            />
+          ) : (
+            <span class="badge-img badge-img-fallback">
+              <Icon name="certificate" size="4rem" />
+            </span>
+          );
+
+          const body = (
+            <span class="badge-body">
+              <span class="badge-name">{cred.name}</span>
+              <span class="badge-meta">{cred.issuer} · {cred.date}</span>
+              <span class="badge-desc">{cred.description}</span>
+              {cred.url && (
+                <span class="badge-verify">
+                  {t('certification.verify')}
+                  <Icon name="external" size="1.4rem" />
+                </span>
+              )}
+            </span>
+          );
+
+          return (
+            <li class="badge-card">
+              {cred.url ? (
+                <a
+                  href={cred.url}
+                  target="_blank"
+                  rel="noopener nofollow"
+                  title={label}
+                  aria-label={`${t('certification.aria.badge')}: ${label}`}
+                >
+                  {media}
+                  {body}
+                </a>
+              ) : (
+                <div class="badge-static" title={label}>
+                  {media}
+                  {body}
+                </div>
+              )}
+            </li>
+          );
+        })
+      }
+    </ul>
+  </div>
 </section>
