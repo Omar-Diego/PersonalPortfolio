@@ -346,18 +346,21 @@ export const content: Record<'es' | 'en', Content> = {
     hero: {
       title: "Hola, soy Omar",
       tagline: 'Desarrollador de Software',
-      p1: 'Estudiante de Ingeniería en Desarrollo de Software e IT Trainee, apasionado por la infraestructura, la seguridad y el desarrollo web.',
-      p2: 'Actualmente en Latin-Link administro servidores, seguridad de correo, despliegues CI/CD y monitoreo de nodos blockchain — mientras sigo construyendo con React y Next.js.',
+      p1: 'Estudiante de Ingeniería en Desarrollo de Software, apasionado por el desarrollo web, móvil y la infraestructura.',
+      p2: 'Construyo con React, Next.js y Astro en la web, Kotlin y React Native en móvil, y tengo experiencia en administración de servidores, seguridad de correo y despliegues CI/CD.',
       p3: '¿Buscas a alguien con ganas de aprender rápido y aportar en tu equipo? Hablemos.',
     },
     about: {
-      p1: 'Ingeniero de software en formación, con experiencia práctica en administración de servidores, seguridad de correo y despliegue de aplicaciones. Como IT Trainee en Latin-Link, administro servidores VPS y cPanel, gestiono dominios y certificados SSL/TLS, y coordino despliegues continuos (CI/CD) en Vercel.',
-      p2: 'Superviso flujos de trabajo en GitHub, integro y monitoreo servicios Web3 y APIs como OpenOcean, Reown, CoinMarketCap, Zerion y Upstash, y optimizo la operación de nodos en las redes blockchain Songbird y Flare. También analizo tráfico web y KPIs de conversión con Google Analytics 4 y PostHog.',
-      p3: 'Mi stack incluye React, Next.js y fundamentos de networking, respaldado por certificaciones en Python, AWS, Java y Red Hat. Curso actualmente Ingeniería en Desarrollo de Software en la Universidad Tecmilenio, donde presido el grupo estudiantil de IDS.',
+      p1: 'Ingeniero de software en formación, con experiencia práctica en desarrollo web y móvil, así como en administración de servidores, seguridad de correo y despliegue de aplicaciones. Como IT Trainee en Latin Link Blockchain, administré servidores VPS y cPanel, gestioné dominios y certificados SSL/TLS, y coordiné despliegues continuos (CI/CD) en Vercel.',
+      p2: 'Supervisé flujos de trabajo en GitHub, integré y monitoreé servicios Web3 y APIs como OpenOcean, Reown, CoinMarketCap, Zerion y Upstash, y optimicé la operación de nodos en las redes blockchain Songbird y Flare. También analicé tráfico web y KPIs de conversión con Google Analytics 4 y PostHog.',
+      p3: 'Mi stack incluye React, Next.js, Astro, Kotlin y React Native, respaldado por certificaciones en Python, AWS, Java y Red Hat. Curso actualmente Ingeniería en Desarrollo de Software en la Universidad Tecmilenio, donde presido el grupo estudiantil de IDS.',
     },
     stack: [
       'React',
       'Next.js',
+      'Astro',
+      'Kotlin',
+      'React Native',
       'HTML',
       'CSS',
       'JavaScript',
@@ -375,6 +378,34 @@ export const content: Record<'es' | 'en', Content> = {
       'Organización y responsabilidad',
     ],
     projects: [
+      {
+        title: 'Racing Cards',
+        img: '/gallery/racing-cards.webp',
+        link: 'https://racingcards.osdc.cloud/',
+        tech: ['Kotlin', 'Jetpack Compose', 'Material 3', 'Room'],
+        desc: 'App Android nativa de cartas coleccionables de coches de carreras, con creación de cartas estilo "gacha", ficha técnica y niveles de rareza. Repositorio privado; el enlace lleva a la documentación oficial.',
+        modal:
+          'Racing Cards es una app Android 100% Jetpack Compose (sin XML ni Fragments) construida alrededor de una colección de cartas coleccionables de coches de carreras. Al crear una carta, sus estadísticas se revelan con una animación tipo "slot machine" y quedan clasificadas por nivel de rareza (S–D). Cuenta con tres pantallas —Gallery, Details y Edit— navegables desde una barra inferior, persistencia local con Room, y un sistema de diseño "dark-native" propio basado en Material 3. Repositorio privado; el enlace lleva a la documentación técnica oficial del proyecto.',
+      },
+      {
+        title: '¿Dios existe?',
+        img: '/gallery/blog-religioso.webp',
+        link: 'https://isajuablog.osdc.cloud/',
+        tech: ['Astro', 'React', 'TypeScript', 'Keystatic CMS', 'Supabase', 'Tailwind CSS', 'Vercel'],
+        desc: 'Blog personal que explora, a través de experiencia personal, entrevistas, reseñas y ensayos, si Dios existe o es una defensa que construimos frente a lo incierto.',
+        modal:
+          'Blog editorial construido con Astro y TypeScript, con contenido (introducción, desarrollo y conclusión) gestionado vía Keystatic CMS y comentarios de lectores almacenados en Supabase/PostgreSQL. Incluye secciones de artículos, entrevistas y reseñas de libros, música y cine organizadas en torno a la pregunta central del proyecto, con animaciones en React/Framer Motion y despliegue en Vercel. Repositorio privado; el enlace lleva al sitio en producción.',
+      },
+      {
+        title: 'Finanzas 3000',
+        img: '/gallery/finanzas-3000.webp',
+        code: 'https://github.com/Omar-Diego/ProyectoGastos',
+        link: 'https://finanzaspersonales.osdc.cloud/',
+        tech: ['Kotlin', 'Jetpack Compose', 'MVVM', 'Room', 'Navigation Compose', 'Coroutines'],
+        desc: 'App Android para registrar un gasto en segundos y ver de un vistazo cuánto se ha gastado en el mes, con gráficas de ingresos vs. gastos y desglose por categoría. Proyecto en equipo (5 personas) para la materia de Aplicaciones Móviles.',
+        modal:
+          'Finanzas 3000 es una app de finanzas personales construida con Kotlin, Jetpack Compose y arquitectura MVVM sobre una base de datos Room. La pantalla de Resumen muestra el balance del mes, su variación contra el mes anterior, una gráfica de barras de ingresos vs. gastos de los últimos 6 meses y una gráfica de dona por categoría. El Registro usa un teclado numérico propio y un flujo de dos pasos (monto → categoría) para capturar movimientos en segundos, y el Historial permite filtrar y agrupar por mes. Proyecto colaborativo de 5 personas (desarrollo y diseño) para la materia de Aplicaciones Móviles; el enlace lleva a la documentación oficial del proyecto.',
+      },
       {
         title: 'Latin Link',
         img: '/gallery/latinlink.webp',
@@ -416,8 +447,17 @@ export const content: Record<'es' | 'en', Content> = {
     ],
     experience: [
       {
+        title: 'Tech Lead (Proyecto por contrato)',
+        role: 'Latin Link Blockchain',
+        date: '07/09/2026 – 12/09/2026',
+        location: 'Querétaro — Remoto',
+        description:
+          'Lideré, bajo un contrato por proyecto, a un equipo de desarrollo encargado de implementar una nueva funcionalidad de pagos dentro de la infraestructura blockchain de la empresa, adaptándola a los sistemas ya existentes. Fui responsable de la investigación y lectura de documentación técnica para la integración de APIs, de la planeación del trabajo del equipo y de garantizar la entrega del proyecto en tiempo y forma. Al concluir el alcance definido, finalizó la relación contractual con la empresa.',
+        tech: ['Blockchain', 'Liderazgo técnico', 'Integración de APIs', 'Gestión de equipos'],
+      },
+      {
         title: 'IT Trainee',
-        role: 'Latin-Link',
+        role: 'Latin Link Blockchain',
         date: 'Desde 07/2025',
         location: 'Querétaro — Remoto',
         description:
@@ -441,18 +481,21 @@ export const content: Record<'es' | 'en', Content> = {
     hero: {
       title: "Hi, I'm Omar",
       tagline: 'Software Developer',
-      p1: 'Software Development Engineering student and IT Trainee, passionate about infrastructure, security, and web development.',
-      p2: 'Currently at Latin-Link, I manage servers, email security, CI/CD deployments, and blockchain node monitoring — while still building with React and Next.js.',
+      p1: 'Software Development Engineering student, passionate about web development, mobile, and infrastructure.',
+      p2: 'I build with React, Next.js, and Astro on the web, Kotlin and React Native on mobile, and have hands-on experience in server administration, email security, and CI/CD deployments.',
       p3: "Looking for someone eager to learn fast and contribute to your team? Let's talk.",
     },
     about: {
-      p1: 'Software engineer in training, with hands-on experience in server administration, email security, and application deployment. As an IT Trainee at Latin-Link, I manage VPS and cPanel servers, handle domains and SSL/TLS certificates, and coordinate continuous deployments (CI/CD) on Vercel.',
-      p2: 'I oversee GitHub workflows, integrate and monitor Web3 services and APIs such as OpenOcean, Reown, CoinMarketCap, Zerion, and Upstash, and optimize node operation on the Songbird and Flare blockchain networks. I also analyze web traffic and conversion KPIs with Google Analytics 4 and PostHog.',
-      p3: "My stack includes React, Next.js, and networking fundamentals, backed by certifications in Python, AWS, Java, and Red Hat. I'm currently pursuing a degree in Software Development Engineering at Universidad Tecmilenio, where I chair the student IDS group.",
+      p1: 'Software engineer in training, with hands-on experience in web and mobile development, as well as server administration, email security, and application deployment. As an IT Trainee at Latin Link Blockchain, I managed VPS and cPanel servers, handled domains and SSL/TLS certificates, and coordinated continuous deployments (CI/CD) on Vercel.',
+      p2: 'I oversaw GitHub workflows, integrated and monitored Web3 services and APIs such as OpenOcean, Reown, CoinMarketCap, Zerion, and Upstash, and optimized node operation on the Songbird and Flare blockchain networks. I also analyzed web traffic and conversion KPIs with Google Analytics 4 and PostHog.',
+      p3: "My stack includes React, Next.js, Astro, Kotlin, and React Native, backed by certifications in Python, AWS, Java, and Red Hat. I'm currently pursuing a degree in Software Development Engineering at Universidad Tecmilenio, where I chair the student IDS group.",
     },
     stack: [
       'React',
       'Next.js',
+      'Astro',
+      'Kotlin',
+      'React Native',
       'HTML',
       'CSS',
       'JavaScript',
@@ -470,6 +513,34 @@ export const content: Record<'es' | 'en', Content> = {
       'Organization & responsibility',
     ],
     projects: [
+      {
+        title: 'Racing Cards',
+        img: '/gallery/racing-cards.webp',
+        link: 'https://racingcards.osdc.cloud/',
+        tech: ['Kotlin', 'Jetpack Compose', 'Material 3', 'Room'],
+        desc: 'Native Android app for collecting racing-car trading cards, with "gacha"-style card creation, a technical spec sheet, and rarity tiers. Private repository; the link goes to the official documentation.',
+        modal:
+          'Racing Cards is a 100% Jetpack Compose Android app (no XML, no Fragments) built around a collection of racing-car trading cards. Creating a card reveals its stats through a "slot machine" style animation and classifies it into a rarity tier (S–D). It has three screens — Gallery, Details, and Edit — navigated from a bottom bar, local persistence with Room, and a custom "dark-native" design system built on Material 3. Private repository; the link goes to the project\'s official technical documentation.',
+      },
+      {
+        title: '¿Dios existe?',
+        img: '/gallery/blog-religioso.webp',
+        link: 'https://isajuablog.osdc.cloud/',
+        tech: ['Astro', 'React', 'TypeScript', 'Keystatic CMS', 'Supabase', 'Tailwind CSS', 'Vercel'],
+        desc: "Personal blog exploring, through personal experience, interviews, reviews, and essays, whether God exists or is a defense we build against uncertainty.",
+        modal:
+          "Editorial blog built with Astro and TypeScript, with its content (introduction, development, and conclusion) managed via Keystatic CMS and reader comments stored in Supabase/PostgreSQL. It includes articles, interviews, and book, music, and film reviews organized around the project's central question, with React/Framer Motion animations and deployment on Vercel. Private repository; the link goes to the live site.",
+      },
+      {
+        title: 'Finanzas 3000',
+        img: '/gallery/finanzas-3000.webp',
+        code: 'https://github.com/Omar-Diego/ProyectoGastos',
+        link: 'https://finanzaspersonales.osdc.cloud/',
+        tech: ['Kotlin', 'Jetpack Compose', 'MVVM', 'Room', 'Navigation Compose', 'Coroutines'],
+        desc: 'Android app for logging an expense in seconds and seeing at a glance how much you\'ve spent this month, with income-vs-expense charts and a per-category breakdown. Built as a 5-person team project for a Mobile Applications course.',
+        modal:
+          "Finanzas 3000 is a personal finance app built with Kotlin, Jetpack Compose, and MVVM architecture on top of a Room database. The Summary screen shows the month's balance, its change versus the prior month, a 6-month income-vs-expense bar chart, and a per-category donut chart. Registration uses a custom numeric keypad and a two-step flow (amount → category) to log movements in seconds, and History supports filtering and grouping by month. A 5-person team project (development and design) for a Mobile Applications course; the link goes to the project's official documentation.",
+      },
       {
         title: 'Latin Link',
         img: '/gallery/latinlink.webp',
@@ -511,8 +582,17 @@ export const content: Record<'es' | 'en', Content> = {
     ],
     experience: [
       {
+        title: 'Tech Lead (Contract Project)',
+        role: 'Latin Link Blockchain',
+        date: '09/07/2026 – 09/12/2026',
+        location: 'Querétaro — Remote',
+        description:
+          'Led, under a project-based contract, a development team tasked with implementing a new payments feature within the company\'s blockchain infrastructure, adapting it to the existing systems. I was responsible for researching and reading technical documentation for API integration, planning the team\'s work, and ensuring the project was delivered on time and to spec. Once the defined scope was completed, the contractual relationship with the company concluded.',
+        tech: ['Blockchain', 'Technical Leadership', 'API Integration', 'Team Management'],
+      },
+      {
         title: 'IT Trainee',
-        role: 'Latin-Link',
+        role: 'Latin Link Blockchain',
         date: 'Since 07/2025',
         location: 'Querétaro — Remote',
         description:
