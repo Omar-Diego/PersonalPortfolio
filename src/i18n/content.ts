@@ -379,6 +379,25 @@ export const content: Record<'es' | 'en', Content> = {
     ],
     projects: [
       {
+        title: 'Lumina',
+        img: '/gallery/lumina.webp',
+        code: 'https://github.com/Omar-Diego/Lumina',
+        link: 'https://luminadocs.osdc.cloud/',
+        tech: ['Next.js 16', 'React 19', 'TypeScript', 'Tailwind CSS v4', 'shadcn/ui', 'Better Auth', 'PostgreSQL', 'Vitest', 'Astro Starlight'],
+        desc: 'Plataforma web de tutorías presenciales que conecta estudiantes con tutores verificados: búsqueda por materia, reserva de franjas y reseñas. El enlace lleva a la documentación oficial.',
+        modal:
+          'Lumina es una plataforma de gestión de tutorías presenciales construida con Next.js 16 (App Router), React 19 y Tailwind CSS v4 con shadcn/ui. Los estudiantes buscan tutores por materia, consultan su disponibilidad, reservan una franja y valoran la sesión; los tutores publican su perfil y sus horarios; y un administrador verifica cada perfil antes de que aparezca en la búsqueda. La autenticación con roles usa Better Auth sobre PostgreSQL, y la lógica crítica se prueba con Vitest. Su sistema de diseño está documentado en DESIGN.md y parte del prototipo en Figma. La documentación —requerimientos, metodología Scrum, arquitectura monolítica, diagramas UML y prototipado— es un sitio propio hecho con Astro Starlight; el enlace lleva a esa documentación y la app funciona en lumina.osdc.cloud.',
+      },
+      {
+        title: 'MD Planeación Patrimonial',
+        img: '/gallery/md-planeacion-patrimonial.webp',
+        link: 'https://md-planeacion-patrimonial.vercel.app/',
+        tech: ['Astro', 'React', 'TypeScript', 'Tailwind CSS', 'Content Collections', 'Vercel'],
+        desc: 'Sitio web para un consultor patrimonial: soluciones de seguros, diagnóstico de riesgo de 2 minutos, blog informativo y contacto directo por WhatsApp. Repositorio privado.',
+        modal:
+          'Sitio comercial para MD Planeación Patrimonial, la práctica de asesoría en seguros y planeación patrimonial de Miguel Diego. Construido con Astro y React (islas interactivas) y Tailwind CSS, incluye un carrusel principal, secciones de soluciones (vida, gastos médicos mayores, retiro, plan educativo y ahorro), una evaluación de riesgo gratuita de 2 minutos, un asistente de chat con acceso directo a WhatsApp, y un blog gestionado con Content Collections de Astro. Cuenta con un sistema de diseño propio de esquinas rectas documentado en DESIGN.md, imágenes optimizadas y despliegue en Vercel. Repositorio privado; el enlace lleva al sitio en producción.',
+      },
+      {
         title: 'Racing Cards',
         img: '/gallery/racing-cards.webp',
         link: 'https://racingcards.osdc.cloud/',
@@ -413,7 +432,7 @@ export const content: Record<'es' | 'en', Content> = {
         tech: ['Next.js 16', 'React', 'TypeScript', 'Tailwind CSS', 'next-intl', 'Supabase', 'Vercel'],
         desc: 'Plataforma Web3 de Latin Link, el primer FTSO y DEX de Latinoamérica en Flare Network. Proyecto privado de la empresa: prácticamente todo el desarrollo del sitio fue mío.',
         modal:
-          'Latin Link es una plataforma DeFi construida con Next.js 16 y TypeScript que ofrece un agregador de swaps no-custodial (vía OpenOcean), un dashboard de delegación de tokens FLR/SGB con estadísticas en tiempo real, y contenido educativo sobre el ecosistema Flare, disponible en español, inglés y portugués con next-intl. Es el repositorio privado de la empresa donde trabajo como IT Trainee, y desarrollé prácticamente la totalidad del frontend y las rutas de API que consumen los datos de FTSO, precios y delegación.',
+          'Latin Link es una plataforma DeFi construida con Next.js 16 y TypeScript que ofrece un agregador de swaps no-custodial (vía OpenOcean), un dashboard de delegación de tokens FLR/SGB con estadísticas en tiempo real, y contenido educativo sobre el ecosistema Flare, disponible en español, inglés y portugués con next-intl. Es el repositorio privado de la empresa donde trabajé como IT Trainee, y desarrollé prácticamente la totalidad del frontend y las rutas de API que consumen los datos de FTSO, precios y delegación.',
       },
       {
         title: 'Colegio Guadiana',
@@ -458,7 +477,7 @@ export const content: Record<'es' | 'en', Content> = {
       {
         title: 'IT Trainee',
         role: 'Latin Link Blockchain',
-        date: 'Desde 07/2025',
+        date: '07/2025 – 08/2026',
         location: 'Querétaro — Remoto',
         description:
           'Orquesté la administración de servidores VPS y cPanel, incluyendo la gestión integral de respaldos y la administración de dominios (DonDominio, DonWeb). Implementé protocolos de seguridad de correo (SPF, DKIM, DMARC), monitoreé la reputación de IP (RBLs) y gestioné certificados SSL/TLS. Supervisé flujos de trabajo en GitHub (Pull Requests, merges) y coordiné despliegues continuos (CI/CD) en Vercel. Integré y monitoreé el consumo de servicios Web3 y APIs como OpenOcean, Reown, CoinMarketCap, Zerion y Upstash. Analicé el tráfico web, creé filtros personalizados y realicé el seguimiento de KPIs de conversión utilizando Google Analytics 4 (GA4) y PostHog. Monitoreé y optimicé la operación de nodos en las redes blockchain Songbird y Flare. Elaboré informes técnicos detallados y resolví incidencias críticas en sistemas y servicios.',
@@ -514,6 +533,25 @@ export const content: Record<'es' | 'en', Content> = {
     ],
     projects: [
       {
+        title: 'Lumina',
+        img: '/gallery/lumina.webp',
+        code: 'https://github.com/Omar-Diego/Lumina',
+        link: 'https://luminadocs.osdc.cloud/',
+        tech: ['Next.js 16', 'React 19', 'TypeScript', 'Tailwind CSS v4', 'shadcn/ui', 'Better Auth', 'PostgreSQL', 'Vitest', 'Astro Starlight'],
+        desc: 'Web platform for in-person tutoring that connects students with verified tutors: search by subject, time-slot booking, and reviews. The link goes to the official documentation.',
+        modal:
+          "Lumina is an in-person tutoring management platform built with Next.js 16 (App Router), React 19, and Tailwind CSS v4 with shadcn/ui. Students search for tutors by subject, check availability, book a time slot, and rate the session; tutors publish their profile and schedule; and an administrator verifies each profile before it appears in search. Role-based authentication uses Better Auth on PostgreSQL, and critical logic is covered with Vitest. Its design system is documented in DESIGN.md and derives from the Figma prototype. The documentation — requirements, Scrum methodology, monolithic architecture, UML diagrams, and prototyping — is its own site built with Astro Starlight; the link goes to that documentation, and the app runs at lumina.osdc.cloud.",
+      },
+      {
+        title: 'MD Planeación Patrimonial',
+        img: '/gallery/md-planeacion-patrimonial.webp',
+        link: 'https://md-planeacion-patrimonial.vercel.app/',
+        tech: ['Astro', 'React', 'TypeScript', 'Tailwind CSS', 'Content Collections', 'Vercel'],
+        desc: 'Website for a wealth-planning consultant: insurance solutions, a 2-minute risk assessment, an informational blog, and direct WhatsApp contact. Private repository.',
+        modal:
+          "Commercial site for MD Planeación Patrimonial, Miguel Diego's insurance advisory and wealth-planning practice. Built with Astro and React (interactive islands) and Tailwind CSS, it includes a hero carousel, solution sections (life, major medical expenses, retirement, education plan, and savings), a free 2-minute risk assessment, a chat assistant with direct WhatsApp access, and a blog managed with Astro Content Collections. It has its own square-cornered design system documented in DESIGN.md, optimized images, and Vercel deployment. Private repository; the link goes to the live site.",
+      },
+      {
         title: 'Racing Cards',
         img: '/gallery/racing-cards.webp',
         link: 'https://racingcards.osdc.cloud/',
@@ -548,7 +586,7 @@ export const content: Record<'es' | 'en', Content> = {
         tech: ['Next.js 16', 'React', 'TypeScript', 'Tailwind CSS', 'next-intl', 'Supabase', 'Vercel'],
         desc: "Web3 platform for Latin Link, Latin America's first FTSO and DEX on the Flare Network. Private company project: I built practically the entire site myself.",
         modal:
-          "Latin Link is a DeFi platform built with Next.js 16 and TypeScript, featuring a non-custodial swap aggregator (via OpenOcean), a FLR/SGB token delegation dashboard with real-time stats, and educational content on the Flare ecosystem, available in Spanish, English, and Portuguese via next-intl. It's the private repository of the company where I work as an IT Trainee, and I developed practically the entire frontend and the API routes that consume FTSO, price, and delegation data.",
+          "Latin Link is a DeFi platform built with Next.js 16 and TypeScript, featuring a non-custodial swap aggregator (via OpenOcean), a FLR/SGB token delegation dashboard with real-time stats, and educational content on the Flare ecosystem, available in Spanish, English, and Portuguese via next-intl. It's the private repository of the company where I worked as an IT Trainee, and I developed practically the entire frontend and the API routes that consume FTSO, price, and delegation data.",
       },
       {
         title: 'Colegio Guadiana',
@@ -593,7 +631,7 @@ export const content: Record<'es' | 'en', Content> = {
       {
         title: 'IT Trainee',
         role: 'Latin Link Blockchain',
-        date: 'Since 07/2025',
+        date: '07/2025 – 08/2026',
         location: 'Querétaro — Remote',
         description:
           'Orchestrated the administration of VPS and cPanel servers, including comprehensive backup management and domain administration (DonDominio, DonWeb). Implemented email security protocols (SPF, DKIM, DMARC), monitored IP reputation (RBLs), and managed SSL/TLS certificates. Oversaw GitHub workflows (Pull Requests, merges) and coordinated continuous deployments (CI/CD) on Vercel. Integrated and monitored the consumption of Web3 services and APIs such as OpenOcean, Reown, CoinMarketCap, Zerion, and Upstash. Analyzed web traffic, built custom filters, and tracked conversion KPIs using Google Analytics 4 (GA4) and PostHog. Monitored and optimized node operation on the Songbird and Flare blockchain networks. Produced detailed technical reports and resolved critical system and service incidents.',
