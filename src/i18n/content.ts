@@ -428,7 +428,7 @@ export const content: Record<'es' | 'en', Content> = {
       {
         title: 'Latin Link',
         img: '/gallery/latinlink.webp',
-        link: 'https://latin-link.net',
+        link: 'https://www.latin-link.net/',
         tech: ['Next.js 16', 'React', 'TypeScript', 'Tailwind CSS', 'next-intl', 'Supabase', 'Vercel'],
         desc: 'Plataforma Web3 de Latin Link, el primer FTSO y DEX de Latinoamérica en Flare Network. Proyecto privado de la empresa: prácticamente todo el desarrollo del sitio fue mío.',
         modal:
@@ -582,7 +582,7 @@ export const content: Record<'es' | 'en', Content> = {
       {
         title: 'Latin Link',
         img: '/gallery/latinlink.webp',
-        link: 'https://latin-link.net',
+        link: 'https://www.latin-link.net/',
         tech: ['Next.js 16', 'React', 'TypeScript', 'Tailwind CSS', 'next-intl', 'Supabase', 'Vercel'],
         desc: "Web3 platform for Latin Link, Latin America's first FTSO and DEX on the Flare Network. Private company project: I built practically the entire site myself.",
         modal:
