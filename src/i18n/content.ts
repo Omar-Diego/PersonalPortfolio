@@ -437,7 +437,7 @@ export const content: Record<'es' | 'en', Content> = {
       {
         title: 'Colegio Guadiana',
         img: '/gallery/colegio-guadiana.webp',
-        link: 'https://colegio-guadiana-next-js.vercel.app',
+        link: 'https://www.colegio-guadiana.mx/',
         tech: ['Next.js', 'TypeScript', 'Payload CMS', 'PostgreSQL', 'Supabase', 'Cloudinary', 'Tailwind CSS'],
         desc: 'Sitio web institucional para un colegio, con panel de administración de contenido vía Payload CMS. Proyecto privado para un cliente.',
         modal:
@@ -591,7 +591,7 @@ export const content: Record<'es' | 'en', Content> = {
       {
         title: 'Colegio Guadiana',
         img: '/gallery/colegio-guadiana.webp',
-        link: 'https://colegio-guadiana-next-js.vercel.app',
+        link: 'https://www.colegio-guadiana.mx/',
         tech: ['Next.js', 'TypeScript', 'Payload CMS', 'PostgreSQL', 'Supabase', 'Cloudinary', 'Tailwind CSS'],
         desc: 'Institutional website for a school, with a content admin panel via Payload CMS. Private project built for a client.',
         modal:
